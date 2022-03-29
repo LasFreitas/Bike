@@ -48,9 +48,6 @@ class Ui_Splash(QtWidgets.QDialog):
         # Configura o form 
         # m_Form.formConfigControl(self)
 
-
-        
-
         #self.show()
 
         #def execBackup():
@@ -60,30 +57,25 @@ class Ui_Splash(QtWidgets.QDialog):
 def main():
     # Atualiza arquivo de log com a data e hora da inicialização do sistema
     m_Text.write_texto("LOG", "INICIALIZAÇÃO DO SISTEMA", "TXT", True)
-
    
 
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv) 
     window = Ui_Splash()
     window.show()
-    
    
+     
     
     m_Backup.delDB(window.lbMessage)
    
-    frmMain.Ui_Main
+    #frmMain.Ui_Main()
       
    
     QTimer.singleShot(5000, app.quit)
-    
-    #appMain = QtWidgets.QApplication(sys.argv)
-    
-    
+      
     
     sys.exit(app.exec_())
       
-
-    
+        
 
 
 if __name__ == '__main__':
