@@ -26,22 +26,15 @@ class Backup:
             self.lblabel = lblabel
             self.filetype = filetype
             
-             # Obtêm a lista de arquivos de backup
+             # Obtêm/ordena a lista de arquivos de backup
             bkpfiles = list(filter(lambda x: x.endswith('.' + self.filetype), os.listdir(self.dirfilebackup)))
-            
             bkpfiles.sort()
-            
-            #bkpFiles = os.listdir(self.dirfilebackup + '*.' + self.filetype).upper()
-            
-            
-            
+                        
             # Exibe mensagem ao usuário 
             self.lblabel.setText('AGUARDE ... VERIFICANDO ARQUIVOS ...' )
             self.lblabel.update()
             self.lblabel.repaint()
-            
-           
-                                
+                                            
             # Executa loop para exclusão dos arquivos
             for delete_file in bkpfiles:
                 
@@ -49,7 +42,7 @@ class Backup:
                 if delete_file[2:-3] <= self.datInicial:
                     
                     # Deleta o arquivo
-                    # TODO Deletar arquivo a ser implementado após testes
+                    # FIXME Deletar arquivo a ser implementado após testes
                     # os.remove(self.dirfilebackup + delete_file).upper())
                     
                     # Atualiza label com a informação do arquivo deletado
@@ -68,6 +61,19 @@ class Backup:
             def backup_db(self):
                 # TODO Rotina de backup a ser implementada
                 pass
+        
+        def BackupDelete():
+            
+            # TODO Criar nova rotina de BACKUP / DELETE de arquivos
+            
+            try:
+                pass
+            except Exception as e:
+                # Atualiza arquivo de erro com o erro ocorrido
+                m_Err.printErr(traceback.format_exc())
+
+
+
             
     except Exception as e:
         # Atualiza arquivo de erro com o erro ocorrido

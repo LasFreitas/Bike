@@ -42,23 +42,19 @@ class Ui_Splash(QtWidgets.QDialog):
         # lbImage = self.findChild(QtWidgets.QLabel, 'lbImage')
         # lbImage.setText('')
 
+        # Atualiza label 
         lbMessage.setText('AGUARDE... VERIFICANDO O SISTEMA')
 
-
+        # Esconde a barra de título e mantêm o form por cima 
         self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint)
-        
-         # Esconde Barra de Titulo
-       # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-         
-        
        
 
     def execBackup(self):
         try:
             # Executa rotina de Backup e Deleta arquivos antigos
-            # TODO Implementar rotina de BACKUP 
+            # FIXME Implementar rotina de BACKUP 
                
-            # Cria instânncia do módulo de BACKUP 
+            # Cria instância do módulo de BACKUP 
             deletarDB = m_Backup.Backup()
     
             # Deleta os arquivos de backup dos dados (DATABASE) antigos
@@ -69,11 +65,7 @@ class Ui_Splash(QtWidgets.QDialog):
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc())
     
-    def exitsplash(self):
-        try:
-            
-            QTimer.singleShot(500, self.close)
-        
+           
         except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc())
