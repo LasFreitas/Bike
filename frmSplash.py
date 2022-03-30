@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import * 
 import time
+import traceback
 
 import sys
 import os
@@ -16,11 +17,15 @@ import m_Form
 #import m_Image
 import m_Backup
 import frmMain
+import m_Err
 
 
 class Ui_Splash(QtWidgets.QDialog):
+    
     def __init__(self):
-        super().__init__()
+       
+        super(Ui_Splash, self).__init__()
+       
         uic.loadUi(m_Var.strScreen + 'FrmSplash.ui', self)
 
         self.setStyleSheet("QDialog { background-color:" + m_Var.clrColorClear + " }");
@@ -40,43 +45,65 @@ class Ui_Splash(QtWidgets.QDialog):
         lbMessage.setText('AGUARDE... VERIFICANDO O SISTEMA')
 
 
-        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
+        self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint)
         
          # Esconde Barra de Titulo
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+       # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+         
+        
+       
 
-        # Configura o form 
-        # m_Form.formConfigControl(self)
-
-        #self.show()
-
-        #def execBackup():
-        #    m_Backup.delDB(lbMessage)
-
+    def execBackup(self):
+        try:
+            # Executa rotina de Backup e Deleta arquivos antigos
+            # TODO Implementar rotina de BACKUP 
+               
+            # Cria instânncia do módulo de BACKUP 
+            deletarDB = m_Backup.Backup()
+    
+            # Deleta os arquivos de backup dos dados (DATABASE) antigos
+            deletarDB.delete_file(self.lbMessage, 'db')
+            
+            
+        except Exception as e:
+            # Atualiza arquivo de erro com o erro ocorrido
+            m_Err.printErr(traceback.format_exc())
+    
+    def exitsplash(self):
+        try:
+            
+            QTimer.singleShot(500, self.close)
+        
+        except Exception as e:
+            # Atualiza arquivo de erro com o erro ocorrido
+            m_Err.printErr(traceback.format_exc())
+        #
 
 def main():
-    # Atualiza arquivo de log com a data e hora da inicialização do sistema
-    m_Text.write_texto("LOG", "INICIALIZAÇÃO DO SISTEMA", "TXT", True)
-   
-
-    app = QtWidgets.QApplication(sys.argv) 
-    window = Ui_Splash()
-    window.show()
-   
-     
     
-    m_Backup.delDB(window.lbMessage)
-   
-    #frmMain.Ui_Main()
-      
-   
-    QTimer.singleShot(5000, app.quit)
-      
+    try:
+        # Atualiza arquivo de log com a data e hora da inicialização do sistema
+        m_Text.write_texto("LOG", "INICIALIZAÇÃO DO SISTEMA", "TXT", True)
     
-    sys.exit(app.exec_())
-      
+        app = QtWidgets.QApplication(sys.argv) 
+        window = Ui_Splash()
+        window.show()
         
+        QTimer.singleShot(50, window.execBackup)
+                   
+        QTimer.singleShot(5000, window.close)
+        
+        app.exec_()
+        
+        frmMain.main()
+        
+      
+      
+    except Exception as e:
+            # Atualiza arquivo de erro com o erro ocorrido
+            m_Err.printErr(traceback.format_exc())
 
 
 if __name__ == '__main__':
     main()
+    

@@ -45,7 +45,7 @@ class Ui_Main(QtWidgets.QDialog):
           
             
             ''' BICICLETA '''
-            butBike = self.findChild(QtWidgets.QPushButton, 'pbBike')
+            butBike = self.findChild(QtWidgets.QPushButton, 'pbBike') 
             butBike.clicked.connect(frmBike.Ui_Bike)
             
             ''' DADOS '''
