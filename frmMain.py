@@ -34,7 +34,7 @@ class Ui_Main(QtWidgets.QDialog):
         try:
             # Carrega form principal
             super(Ui_Main, self).__init__()
-            uic.loadUi(m_Var.strScreen + 'frmMain.ui', self)
+            uic.loadUi(m_Var.strDirSystem + '\\Screen\\frmMain.ui', self)
             
            
             '''---------- BUTTON ----------'''

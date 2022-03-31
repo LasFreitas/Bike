@@ -20,7 +20,7 @@ class Ui_User(QtWidgets.QDialog):
         try:
             
             super(Ui_User,self).__init__() 
-            self.ui = uic.loadUi(m_Var.strScreen + 'frmUser.ui', self)
+            self.ui = uic.loadUi(m_Var.strDirSystem + '\\Screen\\frmUser.ui', self)
                      
             ''' ENCERRAR '''
             # Atribue controle a variável

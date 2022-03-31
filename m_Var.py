@@ -21,11 +21,21 @@ strVersion = ''
 ''' DIRETÓRIOS DE TRABALHO '''
 lstDirectory = ['DATA', 'EXPORT', 'IMPORT','LOG', 'ERR', 'ICONS', 'REPORT', 'BACKUP']
 
+
 ''' BACKUP '''
+# Dias para guardar os arquivos de DADOS
 intBkpDays = 5
+# Dias para guardar os arquivos de LOG/ERR
+intBkpLogErr = 180
 
 
 ''' DIRETÓRIOS DO SISTEMA '''
+
+# Diretório do sistema
+strDirSystem = os.getcwd()
+
+
+
 # Formulários
 strScreen = os.getcwd() + '\\Screen\\'
 # Database

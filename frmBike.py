@@ -1,6 +1,7 @@
 import sys
 import m_FormConfig
 import frmUser
+import m_Var
 
 from PyQt5 import QtWidgets, uic, QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow, QListWidgetItem, QTableWidgetItem, QDialog, QDesktopWidget, QWidget
@@ -11,7 +12,7 @@ class Ui_Bike(QtWidgets.QDialog):
     def __init__(self):
         
         super(Ui_Bike,self).__init__() 
-        self.ui = uic.loadUi('Screen/frmBike.ui', self)
+        self.ui = uic.loadUi(m_Var.strDirSystem + '\\Screen\\frmBike.ui', self)
         
         
               

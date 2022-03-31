@@ -14,7 +14,7 @@ class Backup:
     try:
               
         # Definição do diretório de BACKUP´s
-        dirfilebackup = (os.getcwd() + '\\Backup\\').upper()
+        dirfilebackup = (m_Var.strDirSystem + '\\Backup\\').upper()
         
         # Define a data para deleção dos arquivos antigos, conforme quantidade de dias estipulado
         datInicial = (datetime.datetime.now() - datetime.timedelta(days=int(m_Var.intBkpDays))).strftime("%Y%m%d")[-6:]
@@ -54,7 +54,7 @@ class Backup:
                     # print('DELETANDO ARQUIVO: ' + (self.dirfilebackup + delete_file).upper())
                     
                     # Atualiza arquivo de log com o nome do arquivo deletado
-                    m_Text.write_texto("LOG", "ARQUIVO DE BACKUP APAGADO|" + os.getcwd()+ '\\Backup\\' + delete_file.upper() , "TXT", True)
+                    m_Text.write_texto("LOG", "ARQUIVO DE BACKUP APAGADO|" + self.dirfilebackup + delete_file.upper() , "TXT", True)
                     
                     # Pausa método por um tempo
                     time.sleep(1)
