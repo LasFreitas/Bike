@@ -83,7 +83,7 @@ def main():
         
         QTimer.singleShot(50, window.execBackup)
                    
-        QTimer.singleShot(5000, window.close)
+        QTimer.singleShot(10000, window.close)
         
         app.exec_()
         

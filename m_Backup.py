@@ -26,7 +26,7 @@ class Backup:
             self.lblabel = lblabel
             self.filetype = filetype
             
-             # Obtêm/ordena a lista de arquivos de backup
+             # Obtêm/ordena a lista de arquivos de backup selecionando arquivos pela extensão solicitada
             bkpfiles = list(filter(lambda x: x.endswith('.' + self.filetype), os.listdir(self.dirfilebackup)))
             bkpfiles.sort()
                         
@@ -43,25 +43,29 @@ class Backup:
                     
                     # Deleta o arquivo
                     # FIXME Deletar arquivo a ser implementado após testes
-                    # os.remove(self.dirfilebackup + delete_file).upper())
+                    os.remove(self.dirfilebackup + delete_file)
                     
                     # Atualiza label com a informação do arquivo deletado
                     self.lblabel.setText('DELETANDO ARQUIVO: ' + (self.dirfilebackup + delete_file).upper())
                     self.lblabel.update()
                     self.lblabel.repaint()
                     
-                    print('DELETANDO ARQUIVO: ' + (self.dirfilebackup + delete_file).upper())
+                    # NOTE ---- Excluir, utilizado somente para depuração
+                    # print('DELETANDO ARQUIVO: ' + (self.dirfilebackup + delete_file).upper())
                     
                     # Atualiza arquivo de log com o nome do arquivo deletado
                     m_Text.write_texto("LOG", "ARQUIVO DE BACKUP APAGADO|" + os.getcwd()+ '\\Backup\\' + delete_file.upper() , "TXT", True)
                     
                     # Pausa método por um tempo
                     time.sleep(1)
+
                     
-            def backup_db(self):
-                # TODO Rotina de backup a ser implementada
-                pass
-        
+            # Exibe mensagem ao usuário 
+            self.lblabel.setText('AGUARDE ... CARREGANDO O SISTEMA ...' )
+            self.lblabel.update()
+            self.lblabel.repaint()
+                    
+                   
         def BackupDelete():
             
             # TODO Criar nova rotina de BACKUP / DELETE de arquivos

@@ -86,9 +86,6 @@ def main():
         # Verifica se existe os diretórios necessários para funcionamento do sistema 
         # Caso NÃO exista, cria os diretórios conforme lista       
         m_Directory.checkSystemDirectory(m_Var.getVar('lstDirectory'))
-                
-        # Atualiza arquivo de log com a data e hora da inicialização do sistema
-        m_Text.write_texto("LOG", "INICIALIZAÇÃO DO SISTEMA", "TXT", True)
         
         app = QtWidgets.QApplication(sys.argv)
         ex = Ui_Main()
