@@ -26,7 +26,14 @@ lstDirectory = ['DATA', 'EXPORT', 'IMPORT','LOG', 'ERR', 'ICONS', 'REPORT', 'BAC
 # Dias para guardar os arquivos de DADOS
 intBkpDays = 5
 # Dias para guardar os arquivos de LOG/ERR
-intBkpLogErr = 180
+# FIXME Mudar data para 180 dias
+intBkpLogErr = 10
+
+# Tipos de arquivos a serem controlados pelo BACKUP/DELETE
+# DB = DATABASE
+# ERR = Arquivo de ERROS do sistema
+# LOG = Arquivo de LOG do sistema
+strBkpDelFiles = 'DB|ERR|LOG'
 
 
 ''' DIRETÓRIOS DO SISTEMA '''
@@ -34,12 +41,6 @@ intBkpLogErr = 180
 # Diretório do sistema
 strDirSystem = os.getcwd()
 
-
-
-# Formulários
-strScreen = os.getcwd() + '\\Screen\\'
-# Database
-strDatabase = os.getcwd() + '\\Data\\'
 
 ''' CORES DO SISTEMA '''
 clrColorClear = "#f5f5f5"

@@ -1,3 +1,4 @@
+from msilib.schema import File
 import os
 import datetime
 import traceback
@@ -12,54 +13,75 @@ import m_Var
 class Backup:
       
     try:
-              
-        # Definição do diretório de BACKUP´s
-        dirfilebackup = (m_Var.strDirSystem + '\\Backup\\').upper()
-        
-        # Define a data para deleção dos arquivos antigos, conforme quantidade de dias estipulado
-        datInicial = (datetime.datetime.now() - datetime.timedelta(days=int(m_Var.intBkpDays))).strftime("%Y%m%d")[-6:]
-      
                
         # Deletar arquivos anterior ao período estipulado
-        def delete_file(self, lblabel, filetype):
-            
+        def delete_file(self, lblabel):
+           
+            # 
             self.lblabel = lblabel
-            self.filetype = filetype
+                                    
+            # Obtêm a lista de extensões dos arquivos a serem deletados
+            lstFileExtension = m_Var.strBkpDelFiles.split('|')
             
-             # Obtêm/ordena a lista de arquivos de backup selecionando arquivos pela extensão solicitada
-            bkpfiles = list(filter(lambda x: x.endswith('.' + self.filetype), os.listdir(self.dirfilebackup)))
-            bkpfiles.sort()
-                        
-            # Exibe mensagem ao usuário 
-            self.lblabel.setText('AGUARDE ... VERIFICANDO ARQUIVOS ...' )
-            self.lblabel.update()
-            self.lblabel.repaint()
-                                            
-            # Executa loop para exclusão dos arquivos
-            for delete_file in bkpfiles:
+            # Loop para deletar arquivos desnecessários
+            for FileExtension in lstFileExtension:
+                           
+            
+                # Verifica qual o tipo do arquivo e seleciona diretório correspondente
+                if FileExtension.upper()=="DB":
+                    # Arquivo: BANCO DE DADOS
+                    dirfilebackup = (m_Var.strDirSystem + '\\Backup\\').upper()
+                    
+                    # Define a data para deleção dos arquivos antigos, conforme quantidade de dias estipulado
+                    datInicial = (datetime.datetime.now() - datetime.timedelta(days=int(m_Var.intBkpDays))).strftime("%Y%m%d")[-6:]
+                    
+                elif FileExtension.upper()=='ERR':
+                    # Aquivo: ERROS
+                    dirfilebackup = (m_Var.strDirSystem + '\\Err\\').upper()
+                    
+                    # Define a data para deleção dos arquivos antigos, conforme quantidade de dias estipulado
+                    datInicial = (datetime.datetime.now() - datetime.timedelta(days=int(m_Var.intBkpLogErr))).strftime("%Y%m%d")[-6:] 
+                    
+                elif FileExtension.upper() == 'LOG':
+                    # Aquivo: LOG's
+                    dirfilebackup = (m_Var.strDirSystem + '\\Log\\').upper()
+                    
+                    # Define a data para deleção dos arquivos antigos, conforme quantidade de dias estipulado
+                    datInicial = (datetime.datetime.now() - datetime.timedelta(days=int(m_Var.intBkpLogErr))).strftime("%Y%m%d")[-6:] 
                 
-                # Verifica se o arquivo deve ser deletado
-                if delete_file[2:-3] <= self.datInicial:
+                        
+                # Obtêm/ordena a lista de arquivos de backup selecionando arquivos pela extensão solicitada
+                bkpfiles = list(filter(lambda x: x.endswith('.' + FileExtension), os.listdir(dirfilebackup)))
+                bkpfiles.sort()
+                            
+                # Exibe mensagem ao usuário 
+                self.lblabel.setText('AGUARDE ... VERIFICANDO ARQUIVOS ...' )
+                self.lblabel.update()
+                self.lblabel.repaint()
+                                                
+                # Executa loop para exclusão dos arquivos
+                for delete_file in bkpfiles:
                     
-                    # Deleta o arquivo
-                    # FIXME Deletar arquivo a ser implementado após testes
-                    os.remove(self.dirfilebackup + delete_file)
+                    # Obtêm o comprimento do início do arquivo
+                    intLenFileName = len(FileExtension)
                     
-                    # Atualiza label com a informação do arquivo deletado
-                    self.lblabel.setText('DELETANDO ARQUIVO: ' + (self.dirfilebackup + delete_file).upper())
-                    self.lblabel.update()
-                    self.lblabel.repaint()
-                    
-                    # NOTE ---- Excluir, utilizado somente para depuração
-                    # print('DELETANDO ARQUIVO: ' + (self.dirfilebackup + delete_file).upper())
-                    
-                    # Atualiza arquivo de log com o nome do arquivo deletado
-                    m_Text.write_texto("LOG", "ARQUIVO DE BACKUP APAGADO|" + self.dirfilebackup + delete_file.upper() , "TXT", True)
-                    
-                    # Pausa método por um tempo
-                    time.sleep(1)
-
-                    
+                    # Verifica se o arquivo deve ser deletado
+                    if delete_file[intLenFileName:-3] <= datInicial:
+                        
+                        # Deleta o arquivo
+                        os.remove(dirfilebackup + delete_file)
+                        
+                        # Atualiza label com a informação do arquivo deletado
+                        self.lblabel.setText('DELETANDO ARQUIVO: ' + (dirfilebackup + delete_file).upper())
+                        self.lblabel.update()
+                        self.lblabel.repaint()
+                        
+                        # Atualiza arquivo de log com o nome do arquivo deletado
+                        m_Text.write_texto("LOG", "ARQUIVO " + FileExtension.upper()  + " APAGADO|" + dirfilebackup + delete_file.upper() ,"LOG", True)
+                        
+                        # Pausa método por um tempo
+                        time.sleep(1)
+                        
             # Exibe mensagem ao usuário 
             self.lblabel.setText('AGUARDE ... CARREGANDO O SISTEMA ...' )
             self.lblabel.update()

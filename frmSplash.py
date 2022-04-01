@@ -26,7 +26,7 @@ class Ui_Splash(QtWidgets.QDialog):
        
         super(Ui_Splash, self).__init__()
        
-        uic.loadUi(m_Var.strScreen + 'FrmSplash.ui', self)
+        uic.loadUi(m_Var.strDirSystem + '\\Screen\\FrmSplash.ui', self)
 
         self.setStyleSheet("QDialog { background-color:" + m_Var.clrColorClear + " }");
        
@@ -57,8 +57,8 @@ class Ui_Splash(QtWidgets.QDialog):
             # Cria instância do módulo de BACKUP 
             deletarDB = m_Backup.Backup()
     
-            # Deleta os arquivos de backup dos dados (DATABASE) antigos
-            deletarDB.delete_file(self.lbMessage, 'db')
+            # Deleta os arquivos de backup dos dados (DATABASE/ERROS/LOG) antigos
+            deletarDB.delete_file(self.lbMessage)
             
             
         except Exception as e:
@@ -75,7 +75,7 @@ def main():
     
     try:
         # Atualiza arquivo de log com a data e hora da inicialização do sistema
-        m_Text.write_texto("LOG", "INICIALIZAÇÃO DO SISTEMA", "TXT", True)
+        m_Text.write_texto("LOG", "INICIALIZAÇÃO DO SISTEMA", "LOG", True)
     
         app = QtWidgets.QApplication(sys.argv) 
         window = Ui_Splash()

@@ -34,7 +34,7 @@ def printErr(strErro, blnShowForm = False):
                         strErro += "\t" + item.strip() + "\n"
                       
             # Escreve erro no arquivo de erro
-            m_Text.write_texto("ERR", strErro)
+            m_Text.write_texto("ERR", strErro, "ERR")
             
     except Exception as e:
        # Atualiza arquivo de erro com o erro ocorrido
