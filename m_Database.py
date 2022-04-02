@@ -24,3 +24,17 @@ def createConnection(databasefile):
     # Retorna a conexão
     return connDB
 
+
+
+# TODO Criar rotina para criação de tabelas, caso não existam
+'''
+    CREATE TABLE "cadSysUser" (
+        "UserID"	INTEGER NOT NULL UNIQUE,
+        "UserNickName"	TEXT NOT NULL UNIQUE,
+        "UserAccessNumber"	INTEGER NOT NULL,
+        "UserLastAccess"	TEXT NOT NULL,
+        "UserPassword"	TEXT NOT NULL UNIQUE,
+        PRIMARY KEY("UserID")
+    );
+
+'''

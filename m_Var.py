@@ -16,15 +16,19 @@ strComputer = socket.gethostname()
 strIP = socket.gethostbyname(strComputer)    
 
 ''' DATABASE '''
-strVersion = ''
+strDatabaseFile = 'BK'
+strDatabaseExension = 'DB'
+strDatabaseFileName = "BIKE.DB"
 
 ''' DIRETÓRIOS DE TRABALHO '''
-lstDirectory = ['DATA', 'EXPORT', 'IMPORT','LOG', 'ERR', 'ICONS', 'REPORT', 'BACKUP']
+lstDirectory = ['DATABASE', 'EXPORT', 'IMPORT','LOG', 'ERR', 'ICONS', 'REPORT', 'BACKUP']
 
 
 ''' BACKUP '''
+
 # Dias para guardar os arquivos de DADOS
 intBkpDays = 5
+
 # Dias para guardar os arquivos de LOG/ERR
 # FIXME Mudar data para 180 dias
 intBkpLogErr = 10
@@ -94,7 +98,7 @@ def setVar(strKey, strValor):
         globals() [strKey] 
         [strKey]= strValor
        
-        print(strVersion)
+        #print(strVersion)
     except Exception as e:
         raise e
 

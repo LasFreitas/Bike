@@ -55,10 +55,15 @@ class Ui_Splash(QtWidgets.QDialog):
             # FIXME Implementar rotina de BACKUP 
                
             # Cria instância do módulo de BACKUP 
-            deletarDB = m_Backup.Backup()
+            classBackup = m_Backup.Backup()
     
             # Deleta os arquivos de backup dos dados (DATABASE/ERROS/LOG) antigos
-            deletarDB.delete_file(self.lbMessage)
+            classBackup.delete_file(self.lbMessage)
+            
+            # Realiza backup do banco de dados (DATABASE/ERROS/LOG) antigos
+            classBackup.backup_file(self.lbMessage)
+            
+            
             
             
         except Exception as e:
@@ -82,8 +87,9 @@ def main():
         window.show()
         
         QTimer.singleShot(50, window.execBackup)
+               
                    
-        QTimer.singleShot(10000, window.close)
+        QTimer.singleShot(5000, window.close)
         
         app.exec_()
         
