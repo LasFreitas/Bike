@@ -31,218 +31,284 @@
   <property name="modal">
    <bool>true</bool>
   </property>
-  <widget class="QPushButton" name="pbMaint">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>653</x>
-     <y>7</y>
-     <width>209</width>
-     <height>60</height>
+     <x>60</x>
+     <y>421</y>
+     <width>160</width>
+     <height>364</height>
     </rect>
    </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
-color: rgb(0, 0, 127);</string>
-   </property>
-   <property name="text">
-    <string>Manutenção</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>../Icons/4550629.png</normaloff>../Icons/4550629.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>48</width>
-     <height>48</height>
-    </size>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QRadioButton" name="radioButton_3">
+      <property name="text">
+       <string>RadioButton</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="radioButton_2">
+      <property name="text">
+       <string>RadioButton</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QRadioButton" name="radioButton">
+      <property name="text">
+       <string>RadioButton</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QPushButton" name="pbBike">
+  <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>224</x>
-     <y>7</y>
-     <width>210</width>
-     <height>60</height>
+     <x>379</x>
+     <y>291</y>
+     <width>515</width>
+     <height>297</height>
     </rect>
    </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
-color: rgb(0, 0, 127);</string>
-   </property>
-   <property name="text">
-    <string>Bicicleta</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>../Icons/4550506.png</normaloff>../Icons/4550506.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>48</width>
-     <height>48</height>
-    </size>
-   </property>
-   <property name="autoDefault">
-    <bool>true</bool>
-   </property>
-   <property name="flat">
-    <bool>false</bool>
-   </property>
+   <layout class="QGridLayout" name="gridLayout" rowstretch="5,0,0">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetDefaultConstraint</enum>
+    </property>
+    <property name="leftMargin">
+     <number>5</number>
+    </property>
+    <property name="rightMargin">
+     <number>5</number>
+    </property>
+    <property name="spacing">
+     <number>5</number>
+    </property>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QGraphicsView" name="graphicsView"/>
+    </item>
+    <item row="2" column="1">
+     <widget class="QCheckBox" name="checkBox_2">
+      <property name="text">
+       <string>CheckBox</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QPushButton" name="pbEnd">
-   <property name="geometry">
-    <rect>
-     <x>1082</x>
-     <y>7</y>
-     <width>209</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
-color: rgb(0, 0, 127);</string>
-   </property>
-   <property name="text">
-    <string>Encerrar</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>../Icons/4550511.png</normaloff>../Icons/4550511.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>48</width>
-     <height>48</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pbData">
-   <property name="geometry">
-    <rect>
-     <x>439</x>
-     <y>7</y>
-     <width>209</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
-color: rgb(0, 0, 127);</string>
-   </property>
-   <property name="text">
-    <string>Dados</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>../Icons/4550674.png</normaloff>../Icons/4550674.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>48</width>
-     <height>48</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pbConfig">
-   <property name="geometry">
-    <rect>
-     <x>867</x>
-     <y>7</y>
-     <width>210</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
-color: rgb(0, 0, 127);</string>
-   </property>
-   <property name="text">
-    <string>Configuração</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>../Icons/4550606.png</normaloff>../Icons/4550606.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>48</width>
-     <height>48</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pbUser">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>7</y>
-     <width>209</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
-color: rgb(0, 0, 127);</string>
-   </property>
-   <property name="text">
-    <string>Ciclista</string>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>../Icons/4550540.png</normaloff>../Icons/4550540.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>48</width>
-     <height>48</height>
-    </size>
-   </property>
-  </widget>
-  <widget class="Line" name="line_2">
+  <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>63</y>
+     <y>-1</y>
      <width>1300</width>
-     <height>16</height>
+     <height>67</height>
     </rect>
    </property>
-   <property name="frameShadow">
-    <enum>QFrame::Sunken</enum>
-   </property>
-   <property name="lineWidth">
-    <number>1</number>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
+   <layout class="QHBoxLayout" name="qhvMenu">
+    <property name="spacing">
+     <number>5</number>
+    </property>
+    <property name="sizeConstraint">
+     <enum>QLayout::SetDefaultConstraint</enum>
+    </property>
+    <property name="leftMargin">
+     <number>3</number>
+    </property>
+    <property name="topMargin">
+     <number>1</number>
+    </property>
+    <property name="rightMargin">
+     <number>3</number>
+    </property>
+    <property name="bottomMargin">
+     <number>1</number>
+    </property>
+    <item>
+     <widget class="QPushButton" name="pbUser">
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
+color: rgb(0, 0, 127);</string>
+      </property>
+      <property name="text">
+       <string>Ciclista</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../Icons/4550540.png</normaloff>../Icons/4550540.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>48</width>
+        <height>48</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pbBike">
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
+color: rgb(0, 0, 127);</string>
+      </property>
+      <property name="text">
+       <string>Bicicleta</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../Icons/4550506.png</normaloff>../Icons/4550506.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>48</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="autoDefault">
+       <bool>true</bool>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pbData">
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
+color: rgb(0, 0, 127);</string>
+      </property>
+      <property name="text">
+       <string>Dados</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../Icons/4550674.png</normaloff>../Icons/4550674.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>48</width>
+        <height>48</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pbMaint">
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
+color: rgb(0, 0, 127);</string>
+      </property>
+      <property name="text">
+       <string>Manutenção</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../Icons/4550629.png</normaloff>../Icons/4550629.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>48</width>
+        <height>48</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pbConfig">
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
+color: rgb(0, 0, 127);</string>
+      </property>
+      <property name="text">
+       <string>Configuração</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../Icons/4550606.png</normaloff>../Icons/4550606.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>48</width>
+        <height>48</height>
+       </size>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pbEnd">
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 bold 14pt &quot;Arial Narrow&quot;;
+color: rgb(0, 0, 127);</string>
+      </property>
+      <property name="text">
+       <string>Encerrar</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../Icons/4550511.png</normaloff>../Icons/4550511.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>48</width>
+        <height>48</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="Line" name="line_3">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>-8</y>
-     <width>1300</width>
-     <height>16</height>
+     <y>60</y>
+     <width>1305</width>
+     <height>10</height>
     </rect>
    </property>
    <property name="frameShadow">
@@ -255,14 +321,120 @@ color: rgb(0, 0, 127);</string>
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <zorder>line_2</zorder>
-  <zorder>pbMaint</zorder>
-  <zorder>pbBike</zorder>
-  <zorder>pbEnd</zorder>
-  <zorder>pbData</zorder>
-  <zorder>pbConfig</zorder>
-  <zorder>pbUser</zorder>
-  <zorder>line_3</zorder>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>-1</x>
+     <y>68</y>
+     <width>1301</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+  </widget>
+  <widget class="Line" name="line_4">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>87</y>
+     <width>1305</width>
+     <height>10</height>
+    </rect>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <property name="lineWidth">
+    <number>1</number>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QListView" name="listView">
+   <property name="geometry">
+    <rect>
+     <x>74</x>
+     <y>171</y>
+     <width>256</width>
+     <height>192</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox">
+   <property name="geometry">
+    <rect>
+     <x>525</x>
+     <y>633</y>
+     <width>426</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CheckBox</string>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="dateEdit">
+   <property name="geometry">
+    <rect>
+     <x>402</x>
+     <y>177</y>
+     <width>110</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QDateTimeEdit" name="dateTimeEdit">
+   <property name="geometry">
+    <rect>
+     <x>567</x>
+     <y>189</y>
+     <width>194</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QKeySequenceEdit" name="keySequenceEdit">
+   <property name="geometry">
+    <rect>
+     <x>404</x>
+     <y>672</y>
+     <width>336</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QProgressBar" name="progressBar">
+   <property name="geometry">
+    <rect>
+     <x>385</x>
+     <y>743</y>
+     <width>616</width>
+     <height>5</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>WaitCursor</cursorShape>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::NoContextMenu</enum>
+   </property>
+   <property name="value">
+    <number>50</number>
+   </property>
+   <property name="textVisible">
+    <bool>false</bool>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="invertedAppearance">
+    <bool>false</bool>
+   </property>
+   <property name="textDirection">
+    <enum>QProgressBar::TopToBottom</enum>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

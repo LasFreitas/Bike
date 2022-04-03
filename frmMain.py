@@ -5,8 +5,8 @@
 # imports
 import sys
 import traceback
-
-from PyQt5 import QtCore, QtWidgets, uic
+from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
+#from PyQt5 import QtCore, QtWidgets, uic, Qt
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QDialog,
                              QListWidgetItem, QMainWindow, QTableWidgetItem,
                              QWidget)
@@ -35,7 +35,6 @@ class Ui_Main(QtWidgets.QDialog):
             # Carrega form principal
             super(Ui_Main, self).__init__()
             uic.loadUi(m_Var.strDirSystem + '\\Screen\\frmMain.ui', self)
-            
            
             '''---------- BUTTON ----------'''
             
@@ -68,7 +67,7 @@ class Ui_Main(QtWidgets.QDialog):
             
             # Define titulo do form principal
             self.setWindowTitle(m_Var.strSystem.upper())
-                                    
+                                             
             # Configura o form      
             m_Form.formConfigControl(self)   
                         

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>frmLogin</class>
+ <widget class="QDialog" name="frmLogin">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>330</width>
+    <height>52</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLineEdit" name="lnUser">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>71</x>
+     <y>13</y>
+     <width>250</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>250</width>
+     <height>25</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>250</width>
+     <height>16777215</height>
+    </size>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbUser">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>10</y>
+     <width>58</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="MinimumExpanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>25</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 12pt &quot;Arial&quot;;
+color: rgb(0, 0, 127);</string>
+   </property>
+   <property name="text">
+    <string>Usuário:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

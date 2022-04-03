@@ -12,18 +12,12 @@ class Ui_Config(QtWidgets.QDialog):
         
         super(Ui_Config,self).__init__() 
         self.ui = uic.loadUi(m_Var.strDirSystem + '\\Screen\\frmConfig.ui', self)
-        
-        
               
         ''' ENCERRAR '''
         # Atribue controle a variável
         butExit = self.ui.findChild(QtWidgets.QPushButton, 'pbExit')
         # Atribue função fechar ao click do mouse
         butExit.clicked.connect(self.close)
-        
-        
-        
-        
         
          # Centraliza o form
         self.move(m_FormConfig.centerForm(self))    

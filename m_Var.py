@@ -65,7 +65,7 @@ clrFontDark = "#311b92"
 
 ''' FONTES DO SISTEMA '''
 #fntSystem font family, size, Weight, style
-fntSystem = 'Tahoma,16,normal,normal'
+fntSystem = 'Tahoma,14,normal,normal'
 fntReport = 'Courier,9'
 
 

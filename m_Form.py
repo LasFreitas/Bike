@@ -24,15 +24,29 @@ def formConfigControl(objForm):
              
         # Centraliza o form
         objForm.move(m_Form.centerForm(objForm))    
-           
-           
-        # Percorre os controles do form para configuração
-        for widget in objForm.children():
-             
+         
+        
+        '''
+            https://stackoverflow.com/questions/25164853/how-to-use-findchildren#25165738
+        
+            for name, obj in dict(self.__dict__).items():
+                # print(str(name) + str(obj))
+                obj_type = str(obj).strip("<PyQt5").rsplit(" ")[0].replace(".", '', 1)
+                # obj_type = str(obj).strip("<").rsplit(" ")[0]
+                # print(obj_type)
+                # obj_type = obj_str.strip("<PyQt5").rsplit(" ")[0].replace(".", '', 1)
+                label_name = "self." + str(name)
+            
+        '''
+        
+        # Executa loop em todos os controles do form para configuração
+        for type, objForm in dict(objForm.__dict__).items():
+              
+              
             # Configura BUTTON           
-            if isinstance(widget, QPushButton):
+            if isinstance(objForm, QPushButton):
                 
-               widget.setStyleSheet('QPushButton {'   
+               objForm.setStyleSheet('QPushButton {'   
                                      + 'font-family:' + str(fntDefault[0]) + ';' 
                                      + 'font-size:' +  fntDefault[1] + 'px ;'
                                      + 'font-Weight:' + str(fntDefault[2]) + ';'
@@ -41,10 +55,10 @@ def formConfigControl(objForm):
                                      + 'color:' + str(m_Color.textcontrast(m_Var.clrColor90)) + ';'
                                      + ';}' )
 
-             # Configura LABEL           
-            elif isinstance(widget, QLabel):
+            # Configura LABEL           
+            elif isinstance(  objForm , QLabel):
                               
-               widget.setStyleSheet('QLabel {'   
+               objForm.setStyleSheet('QLabel {'   
                                      + 'font-family:' + str(fntDefault[0]) + ';' 
                                      + 'font-size:' +  fntDefault[1] + 'px ;'
                                      + 'font-Weight:' + str(fntDefault[2]) + ';'
@@ -54,13 +68,35 @@ def formConfigControl(objForm):
                                      + ';}' )
             
             # Configura LINE           
-            elif isinstance(widget, QFrame):
+            elif isinstance(objForm, QFrame):
                               
-               widget.setStyleSheet('QFrame {'   
+               objForm.setStyleSheet('QFrame {'   
                                      + 'color:' + str(m_Var.clrColorDark) + ';'
                                      + ';}' )
                 
+            # Configura RADIOBUTTON          
+            elif isinstance(  objForm , QRadioButton):
+                              
+               objForm.setStyleSheet('QRadioButton {'   
+                                     + 'font-family:' + str(fntDefault[0]) + ';' 
+                                     + 'font-size:' +  fntDefault[1] + 'px ;'
+                                     + 'font-Weight:' + str(fntDefault[2]) + ';'
+                                     + 'font-style:' + str(fntDefault[3]) + ';'
+                                     + "background-color: " + str(m_Var.clrColorClear) + ';'
+                                     + 'color:' + str(m_Color.textcontrast(m_Var.clrColorClear)) + ';'
+                                     + ';}' )
             
+            # Configura CHECKBOX         
+            elif isinstance(  objForm , QCheckBox):
+                              
+               objForm.setStyleSheet('QCheckBox {'   
+                                     + 'font-family:' + str(fntDefault[0]) + ';' 
+                                     + 'font-size:' +  fntDefault[1] + 'px ;'
+                                     + 'font-Weight:' + str(fntDefault[2]) + ';'
+                                     + 'font-style:' + str(fntDefault[3]) + ';'
+                                     + "background-color: " + str(m_Var.clrColorClear) + ';'
+                                     + 'color:' + str(m_Color.textcontrast(m_Var.clrColorClear)) + ';'
+                                     + ';}' )
                 
             else:
                 pass
