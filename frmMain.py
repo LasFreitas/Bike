@@ -4,6 +4,7 @@
 
 # imports
 import sys
+import time
 import traceback
 from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
 #from PyQt5 import QtCore, QtWidgets, uic, Qt
@@ -11,10 +12,19 @@ from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QDialog,
                              QListWidgetItem, QMainWindow, QTableWidgetItem,
                              QWidget)
 
+#from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui
+#from PyQt5.QtGui import QIcon, QPixmap
+#from PyQt5.QtGui import *
+#from PyQt5.QtWidgets import *
+from PyQt5.QtCore import * 
+
+
+
 # imports locais
 import frmBike
 import frmConfig
 import frmData
+import frmLogin
 import frmMaint
 import frmUser
 import m_Application
@@ -72,7 +82,7 @@ class Ui_Main(QtWidgets.QDialog):
             m_Form.formConfigControl(self)   
                         
             # Exibe form
-            self.show()
+            #self.show()
             
         except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
@@ -87,8 +97,15 @@ def main():
         m_Directory.checkSystemDirectory(m_Var.getVar('lstDirectory'))
         
         app = QtWidgets.QApplication(sys.argv)
-        ex = Ui_Main()
-        sys.exit(app.exec_())  
+        window = Ui_Main()
+        window.show()
+                
+        QTimer.singleShot(500,frmLogin.main())
+        
+        app.exec_()
+              
+        
+        
     
     except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
