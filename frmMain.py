@@ -81,6 +81,7 @@ class Ui_Main(QtWidgets.QDialog):
             # Configura o form      
             m_Form.formConfigControl(self)   
                         
+            
             # Exibe form
             #self.show()
             

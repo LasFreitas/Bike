@@ -79,7 +79,9 @@ class Ui_Login(QtWidgets.QDialog):
 
 
     def Key_Return(self):
+        
         print(m_Hash.CreateHash(self.lbPassword.text()))  
+              
                   
 def main():
     

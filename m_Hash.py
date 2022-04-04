@@ -47,4 +47,3 @@ def CreateHash(strHash, enmHash = EnumHash.m_MD5):
    except Exception as e:
       # Atualiza arquivo de erro com o erro ocorrido
       m_Err.printErr(traceback.format_exc())
-
