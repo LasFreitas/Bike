@@ -13,99 +13,74 @@ import m_Err
 import m_Color
 import m_Form
 
+ # Definição de variáveis
+       
+''' ---------- FONTE ---------- '''
+fntControl = m_Var.fntSystem.split(',')
 
-def formConfigControl(objForm):
+fntControlFamily = fntControl[0]
+fntControlSize = fntControl[1]
+fntContolWeigth = fntControl[2]
+fntControlBold = fntControl[3]
+
+''' ---------- COR ---------- '''
+clrControlBackcolor = m_Var.clrColorClear
+clrControlForecolor = m_Var.clrColorDark
+
+
+
+
+
+def Form_Center(object):
+    # Centraliza form na tela
+    qtRectangle = object.frameGeometry()
+    centerPoint = QDesktopWidget().availableGeometry().center()
+    qtRectangle.moveCenter(centerPoint)
+    return(qtRectangle.topLeft())
+
+def Form_Config(objForm):
     try:
-               
-        fntDefault = m_Var.fntSystem.split(',')
-           
-        # Configura cor de fundo do form
-        objForm.setStyleSheet('background-color: ' + str(m_Var.clrColorClear)) 
              
         # Centraliza o form
-        objForm.move(m_Form.centerForm(objForm))    
-         
-        
-        '''
-            https://stackoverflow.com/questions/25164853/how-to-use-findchildren#25165738
-        
-            for name, obj in dict(self.__dict__).items():
-                # print(str(name) + str(obj))
-                obj_type = str(obj).strip("<PyQt5").rsplit(" ")[0].replace(".", '', 1)
-                # obj_type = str(obj).strip("<").rsplit(" ")[0]
-                # print(obj_type)
-                # obj_type = obj_str.strip("<PyQt5").rsplit(" ")[0].replace(".", '', 1)
-                label_name = "self." + str(name)
-            
-        '''
-        
-        # Executa loop em todos os controles do form para configuração
-        for type, objForm in dict(objForm.__dict__).items():
+        objForm.move(m_Form.Form_Center(objForm))    
               
+        # Executa loop para configurar os controles
+        for objForm in dict(objForm.__dict__).items():
               
-            # Configura BUTTON           
-            if isinstance(objForm, QPushButton):
-                
-               objForm.setStyleSheet('QPushButton {'   
-                                     + 'font-family:' + str(fntDefault[0]) + ';' 
-                                     + 'font-size:' +  fntDefault[1] + 'px ;'
-                                     + 'font-Weight:' + str(fntDefault[2]) + ';'
-                                     + 'font-style:' + str(fntDefault[3]) + ';'
-                                     + "background-color: " + str(m_Var.clrColor90) + ';'
-                                     + 'color:' + str(m_Color.textcontrast(m_Var.clrColor90)) + ';'
-                                     + ';}' )
-
-            # Configura LABEL           
-            elif isinstance(  objForm , QLabel):
-                              
-               objForm.setStyleSheet('QLabel {'   
-                                     + 'font-family:' + str(fntDefault[0]) + ';' 
-                                     + 'font-size:' +  fntDefault[1] + 'px ;'
-                                     + 'font-Weight:' + str(fntDefault[2]) + ';'
-                                     + 'font-style:' + str(fntDefault[3]) + ';'
-                                     + "background-color: " + str(m_Var.clrColorClear) + ';'
-                                     + 'color:' + str(m_Color.textcontrast(m_Var.clrColorClear)) + ';'
-                                     + ';}' )
+            try:
+                                          
+               # Verifica se é para formatar o controle
+               if objForm[1].accessibleName()> "":
+                    
+                   # Configura o controle conforme as especifícações
+                   Form_Config_Control(objForm[1].accessibleName().upper().split("|"))
+                   
+                   
+                   
+                   print(objForm[1])
+                   
+                   if type(objForm[1]) == QLabel:
+                  
+                        objForm[1].setStyleSheet('QLabel {'   
+                                    + 'font-family:' + fntControlFamily + ';' 
+                                    + 'font-size:' +  fntControlSize + 'px ;'
+                                    + 'font-Weight:' + fntContolWeigth + ';'
+                                    + 'font-style:' + fntControlBold + ';'
+                                    + 'background-color: ' + clrControlBackcolor + ';'
+                                    + 'color: ' + clrControlForecolor + ';'
+                                    + ';}' )
+                  
+                   elif type(objForm[1]) == QFrame:
+                      
+                        objForm[1].setStyleSheet('QFrame {'   
+                                    + 'background-color: ' + clrControlBackcolor + ';'
+                                    + ';}' )
+                    
+                   
             
-            # Configura LINE           
-            elif isinstance(objForm, QFrame):
-                              
-               objForm.setStyleSheet('QFrame {'   
-                                     + 'color:' + str(m_Var.clrColorDark) + ';'
-                                     + ';}' )
-                
-            # Configura RADIOBUTTON          
-            elif isinstance(  objForm , QRadioButton):
-                              
-               objForm.setStyleSheet('QRadioButton {'   
-                                     + 'font-family:' + str(fntDefault[0]) + ';' 
-                                     + 'font-size:' +  fntDefault[1] + 'px ;'
-                                     + 'font-Weight:' + str(fntDefault[2]) + ';'
-                                     + 'font-style:' + str(fntDefault[3]) + ';'
-                                     + "background-color: " + str(m_Var.clrColorClear) + ';'
-                                     + 'color:' + str(m_Color.textcontrast(m_Var.clrColorClear)) + ';'
-                                     + ';}' )
-            
-            # Configura CHECKBOX         
-            elif isinstance(  objForm , QCheckBox):
-                              
-               objForm.setStyleSheet('QCheckBox {'   
-                                     + 'font-family:' + str(fntDefault[0]) + ';' 
-                                     + 'font-size:' +  fntDefault[1] + 'px ;'
-                                     + 'font-Weight:' + str(fntDefault[2]) + ';'
-                                     + 'font-style:' + str(fntDefault[3]) + ';'
-                                     + "background-color: " + str(m_Var.clrColorClear) + ';'
-                                     + 'color:' + str(m_Color.textcontrast(m_Var.clrColorClear)) + ';'
-                                     + ';}' )
-                
-            else:
+            except:
                 pass
-               
-                                   
-                
-                
-                
-              
+            
        
     
     
@@ -113,54 +88,42 @@ def formConfigControl(objForm):
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc())
     
-
-
-
-
-
-
-''' Função para configurar o form '''
-def formConfig1(strFormat):
+def Form_Config_Control(strConfigControl):
     try:
-        # Divide a configuração em itens
-        fconfig = strFormat.split('|')
         
-        fntDefault = m_Var.fntSystem.split(',')
-    
-        objFormat =''
-    
-        if strFormat != "":
+        print(strConfigControl)
+        
+        # Executa loop para configurar controle
+        for i in range(len(strConfigControl)):
+           
+            print(strConfigControl[i])
             
-            for i in  fconfig:
-                ''' formata as cores do controle '''            
-                if i.upper() == 'SYS':
-                    objFormat =  "background-color: " + m_Var.clrColorDark + ';'
-                    objFormat += "color: " + m_Color.textcontrast(m_Var.clrColorDark) + ';'
-                
-                elif i.upper()[:2] == 'FS':
-                    objFormat += "font: " + i[2:] + "pt " + fntDefault[0] + ";"
-                
-                elif i.upper() == 'MSG':
-                    objFormat += "color: " + 'Red' + ';'
-        else:
-            objFormat =  "background-color: " + m_Var.clrColorClear + ';'
-            objFormat += "color: " + m_Color.textcontrast(m_Var.clrColorClear) + ';'
-            objFormat += "font: " + fntDefault[1] + "pt " + fntDefault[0] + ";"        
-                          
-                    
-            
-        return objFormat
+            if strConfigControl[i] == "SYS": # CORES DO SISTEMA
                
-        # "background-color: rgb(85, 170, 0);color: rgb(0, 85, 255);font: 87 12pt \"Arial Black\";"
-                   
+                m_Form.clrControlBackcolor = m_Var.clrColorDark
+               
+                m_Form.clrControlForecolor = m_Var.clrFontClear #m_Color.textcontrast(clrControlBackcolor)
+                
+                
+                
+                '''
+                
+                strFormatBackground ='background-color: ' + str(m_Var.clrColorDark)
+                strFormatForeground = 'color: ' + str(m_Color.textcontrast(m_Var.clrColorDark))
+                             
+                '''
+            
+            # return True
+            #return False        
+
+
+                    
+
+
     except Exception as e:
-        raise e
+            # Atualiza arquivo de erro com o erro ocorrido
+            m_Err.printErr(traceback.format_exc())
     
 
 
-def centerForm(object):
-    # Centraliza form na tela
-    qtRectangle = object.frameGeometry()
-    centerPoint = QDesktopWidget().availableGeometry().center()
-    qtRectangle.moveCenter(centerPoint)
-    return(qtRectangle.topLeft())
+

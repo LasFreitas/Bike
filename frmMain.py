@@ -11,7 +11,7 @@ from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QDialog,
                              QListWidgetItem, QMainWindow, QTableWidgetItem,
                              QWidget)
-
+from datetime import datetime
 #from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui
 #from PyQt5.QtGui import QIcon, QPixmap
 #from PyQt5.QtGui import *
@@ -45,6 +45,17 @@ class Ui_Main(QtWidgets.QDialog):
             # Carrega form principal
             super(Ui_Main, self).__init__()
             uic.loadUi(m_Var.strDirSystem + '\\Screen\\frmMain.ui', self)
+            
+            
+             # Esconde a barra de título
+            self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+           
+            '''---------- LABEL ----------'''
+           
+            # Instância label título e modifica texto
+            lbTittle = self.findChild(QtWidgets.QLabel, 'lbTittle')
+            lbTittle.setText(m_Var.strSystem)
+           
            
             '''---------- BUTTON ----------'''
             
@@ -75,15 +86,32 @@ class Ui_Main(QtWidgets.QDialog):
             butEnd = self.findChild(QtWidgets.QPushButton, 'pbEnd')
             butEnd.clicked.connect(m_Application.endApplication)
             
+            
+            
+            self.lbLabel =self.findChild(QtWidgets.QLabel, 'lbTimer')
+            
             # Define titulo do form principal
-            self.setWindowTitle(m_Var.strSystem.upper())
+            #self.setWindowTitle(m_Var.strSystem.upper())
+           
                                              
             # Configura o form      
-            m_Form.formConfigControl(self)   
-                        
+            m_Form.Form_Config(self)   
+                      
+           
             
-            # Exibe form
-            #self.show()
+            def showtimelabel():
+               horaminuto= datetime.now()
+               textHM = horaminuto.strftime("%H:%M:%S")
+               self.lbLabel.setText(str(textHM) ) 
+               self.lbLabel.update()
+               self.lbLabel.repaint()
+            
+            # Exibe hora:minuto no label
+            timer = QTimer(self)
+            timer.timeout.connect(showtimelabel)
+            timer.start()
+            
+            
             
         except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
@@ -102,6 +130,10 @@ def main():
         window.show()
                 
         QTimer.singleShot(500,frmLogin.main())
+        
+      
+
+           
         
         app.exec_()
               
