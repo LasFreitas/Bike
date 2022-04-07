@@ -54,14 +54,12 @@ class Ui_Main(QtWidgets.QDialog):
              # Esconde a barra de título
             self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
            
-           
             '''---------- BUTTON ----------'''
             
             ''' USUÁRIO '''
             butUser = self.findChild(QtWidgets.QPushButton, 'pbUser')
             butUser.clicked.connect(frmUser.Ui_User)
-          
-            
+                      
             ''' BICICLETA '''
             butBike = self.findChild(QtWidgets.QPushButton, 'pbBike') 
             butBike.clicked.connect(frmBike.Ui_Bike)
@@ -77,13 +75,11 @@ class Ui_Main(QtWidgets.QDialog):
             ''' CONFIGURAÇÃO '''
             butConfig = self.findChild(QtWidgets.QPushButton, 'pbConfig')
             butConfig.clicked.connect(frmConfig.Ui_Config)
-        
-                        
+                                
             ''' ENCERRAR '''
             # Atribue controle a variável
             butEnd = self.findChild(QtWidgets.QPushButton, 'pbEnd')
             butEnd.clicked.connect(m_Application.System_End)
-                        
             
             '''---------- LABEL ----------'''
             
@@ -114,24 +110,22 @@ class Ui_Main(QtWidgets.QDialog):
             lbSystemClose.setPixmap(QPixmap(m_Image.Load_Image('Close.png')))
             # TODO Verificar rotina para fechar form
             lbSystemClose.mousePressEvent = m_Application.System_End
-            
-            
+           
             # Define titulo do form principal
             #self.setWindowTitle(m_Var.strSystem.upper())
-           
-                                             
+                                                        
             # Configura o form      
             m_Form.Form_Config(self)   
                       
-           
-            
+                      
+            # Função para atualizar informações do sistema
             def System_Information():
 
                 # Exibe HORA
                 self.lbHourMinute.setText(datetime.now().strftime("%H:%M")) #:%S" ) 
                 self.lbHourMinute.update()
                 self.lbHourMinute.repaint()
-                # EXibe DATA
+                # Exibe DATA
                 self.lbDateNow.setText(datetime.now().strftime("%d/%m/%Y"))
                 self.lbDateNow.update()
                 self.lbDateNow.repaint()
@@ -141,11 +135,20 @@ class Ui_Main(QtWidgets.QDialog):
                     strDatabaseImage = ["DBOn.png" , "Database Online"]
                 else:
                     strDatabaseImage = ["DBOff.png" , "Database Offline"]
-                    
+                
+                # Carrega IMAGEM e atualiza tooltip
                 lbSystemDatabase = self.findChild(QtWidgets.QLabel, 'lbDatabase')
                 lbSystemDatabase.setPixmap(QPixmap(m_Image.Load_Image(strDatabaseImage[0])))
                 lbSystemDatabase.setToolTip(strDatabaseImage[1])
-            
+
+                lbSystemError = self.findChild(QtWidgets.QLabel, 'lbErr')
+                if m_Var.blnError == True:
+                    
+                    lbSystemError.setPixmap(QPixmap(m_Image.Load_Image('Error.png')))
+                else:
+                    
+                   pass
+                
             # Exibe hora:minuto no label
             timer = QTimer(self)
             timer.timeout.connect(System_Information)

@@ -27,7 +27,8 @@ def System_End():
        
 
 
-
+# Função para minimizar form
+# TODO Refazer esta função para minimizar o form
 def Form_Minimized(objForm):
        try:
           

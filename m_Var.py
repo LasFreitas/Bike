@@ -90,7 +90,8 @@ def getUser():
         pass
     
     
-    
+''' ERROR ''' 
+blnError = False
     
     
 def setVar(strKey, strValor):

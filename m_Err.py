@@ -5,6 +5,7 @@ import traceback
 
 # imports locais
 import m_Text
+import m_Var
 
 
 
@@ -35,6 +36,8 @@ def printErr(strErro, blnShowForm = False):
                       
             # Escreve erro no arquivo de erro
             m_Text.write_texto("ERR", strErro, "ERR")
+            
+            m_Var.blnError = True       
             
     except Exception as e:
        # Atualiza arquivo de erro com o erro ocorrido
