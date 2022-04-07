@@ -48,7 +48,7 @@ strDirSystem = os.getcwd()
 
 ''' CORES DO SISTEMA '''
 clrColorClear = "#f5f5f5"
-clrColorDark = "#1a237e" #00695c"
+clrColorDark = "#01579b" #00695c"
 
 clrColor10 = m_Color.screenshades(clrColorDark,0.1)
 clrColor20 = m_Color.screenshades(clrColorDark,0.2)

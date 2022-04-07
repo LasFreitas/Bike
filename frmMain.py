@@ -3,9 +3,11 @@
 
 
 # imports
+import os
 import sys
 import time
 import traceback
+from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
 #from PyQt5 import QtCore, QtWidgets, uic, Qt
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QDialog,
@@ -31,9 +33,9 @@ import m_Application
 import m_Directory
 import m_Err
 import m_Form
+import m_Image
 import m_Text
 import m_Var
-
 
 
 '''---------- FORM MAIN ----------'''
@@ -42,19 +44,15 @@ class Ui_Main(QtWidgets.QDialog):
     def __init__(self):
 
         try:
+            
+            '''---------- FORM ----------'''
+            
             # Carrega form principal
             super(Ui_Main, self).__init__()
             uic.loadUi(m_Var.strDirSystem + '\\Screen\\frmMain.ui', self)
-            
-            
+                        
              # Esconde a barra de título
             self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-           
-            '''---------- LABEL ----------'''
-           
-            # Instância label título e modifica texto
-            lbTittle = self.findChild(QtWidgets.QLabel, 'lbTittle')
-            lbTittle.setText(m_Var.strSystem)
            
            
             '''---------- BUTTON ----------'''
@@ -84,11 +82,39 @@ class Ui_Main(QtWidgets.QDialog):
             ''' ENCERRAR '''
             # Atribue controle a variável
             butEnd = self.findChild(QtWidgets.QPushButton, 'pbEnd')
-            butEnd.clicked.connect(m_Application.endApplication)
+            butEnd.clicked.connect(m_Application.System_End)
+                        
             
+            '''---------- LABEL ----------'''
             
+            # Instância label título e modifica texto
+            lbTittle = self.findChild(QtWidgets.QLabel, 'lbTittle')
+            lbTittle.setText(m_Var.strSystem)
+                       
+            # Hora Atual
+            self.lbHourMinute = self.findChild(QtWidgets.QLabel, 'lbTime')
             
-            self.lbLabel =self.findChild(QtWidgets.QLabel, 'lbTimer')
+            # Data Atual
+            self.lbDateNow = self.findChild(QtWidgets.QLabel, 'lbDate')
+            
+            # Imagem Brasil
+            lbSystemBrasil = self.findChild(QtWidgets.QLabel, 'lbBrasil')
+            lbSystemBrasil.setPixmap(QPixmap(m_Image.Load_Image('Brasil.png')))           
+                       
+            # Imagem Minimize
+            lbSystemMinimize = self.findChild(QtWidgets.QLabel, 'lbMinimize')
+            lbSystemMinimize.setPixmap(QPixmap(m_Image.Load_Image('Minimize.png')))
+            
+            # TODO Criar rotina para minimizar o form
+            #lbSystemMinimize.mousePressEvent = print("sdafasdaf") #m_Application.Form_Minimized(self)
+            #self.setWindowFlags(QtCore.Qt.WindowMinimized)
+            
+             # Imagem CLOSE
+            lbSystemClose = self.findChild(QtWidgets.QLabel, 'lbClose')
+            lbSystemClose.setPixmap(QPixmap(m_Image.Load_Image('Close.png')))
+            # TODO Verificar rotina para fechar form
+            lbSystemClose.mousePressEvent = m_Application.System_End
+            
             
             # Define titulo do form principal
             #self.setWindowTitle(m_Var.strSystem.upper())
@@ -99,16 +125,30 @@ class Ui_Main(QtWidgets.QDialog):
                       
            
             
-            def showtimelabel():
-               horaminuto= datetime.now()
-               textHM = horaminuto.strftime("%H:%M:%S")
-               self.lbLabel.setText(str(textHM) ) 
-               self.lbLabel.update()
-               self.lbLabel.repaint()
+            def System_Information():
+
+                # Exibe HORA
+                self.lbHourMinute.setText(datetime.now().strftime("%H:%M")) #:%S" ) 
+                self.lbHourMinute.update()
+                self.lbHourMinute.repaint()
+                # EXibe DATA
+                self.lbDateNow.setText(datetime.now().strftime("%d/%m/%Y"))
+                self.lbDateNow.update()
+                self.lbDateNow.repaint()
+                
+                # Imagem DATABASE
+                if os.path.exists(m_Var.strDirSystem + "\\Database\\" + m_Var.strDatabaseFileName):
+                    strDatabaseImage = ["DBOn.png" , "Database Online"]
+                else:
+                    strDatabaseImage = ["DBOff.png" , "Database Offline"]
+                    
+                lbSystemDatabase = self.findChild(QtWidgets.QLabel, 'lbDatabase')
+                lbSystemDatabase.setPixmap(QPixmap(m_Image.Load_Image(strDatabaseImage[0])))
+                lbSystemDatabase.setToolTip(strDatabaseImage[1])
             
             # Exibe hora:minuto no label
             timer = QTimer(self)
-            timer.timeout.connect(showtimelabel)
+            timer.timeout.connect(System_Information)
             timer.start()
             
             

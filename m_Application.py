@@ -16,7 +16,7 @@ import m_Err
 
 '''---------- FUNÇÕES ----------'''
 # Encerra a aplicação
-def endApplication():
+def System_End():
     
     try:
        sys.exit()
@@ -24,3 +24,16 @@ def endApplication():
     except Exception as e:
        # Atualiza arquivo de erro com o erro ocorrido
        m_Err.printErr(traceback.format_exc())
+       
+
+
+
+def Form_Minimized(objForm):
+       try:
+          
+          objForm.showMinimized()
+          
+          
+       except Exception as e:
+         # Atualiza arquivo de erro com o erro ocorrido
+         m_Err.printErr(traceback.format_exc())

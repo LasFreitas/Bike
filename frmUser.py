@@ -31,7 +31,7 @@ class Ui_User(QtWidgets.QDialog):
             
          
             # Configura o form 
-            m_Form.formConfigControl(self)
+            m_Form.Form_Config(self)
              
             # Exibe o form        
             self.show()
