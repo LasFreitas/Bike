@@ -157,7 +157,7 @@ def Form_Config_Control(strConfigControl):
             elif strConfigControl[i] == "BUT": # CORES DOS BOTÕES
 
                 # Configura cor de fundo do botão
-                m_Form.clrControlBackcolor = m_Var.clrColor70
+                m_Form.clrControlBackcolor = m_Var.clrColor90
                
             
                 ''' ---------- FONTE ---------- '''

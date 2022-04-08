@@ -58,40 +58,52 @@ class Ui_Main(QtWidgets.QDialog):
             
             ''' USUÁRIO '''
             butUser = self.findChild(QtWidgets.QPushButton, 'pbUser')
+            butUser.setIcon(QtGui.QIcon(m_Image.Load_Image('Cyclist.png')))
             butUser.clicked.connect(frmUser.Ui_User)
                       
             ''' BICICLETA '''
             butBike = self.findChild(QtWidgets.QPushButton, 'pbBike') 
+            butBike.setIcon(QtGui.QIcon(m_Image.Load_Image('Bike.png')))
             butBike.clicked.connect(frmBike.Ui_Bike)
             
             ''' DADOS '''
             butData = self.findChild(QtWidgets.QPushButton, 'pbData')
+            butData.setIcon(QtGui.QIcon(m_Image.Load_Image('Data.png')))
             butData.clicked.connect(frmData.Ui_Data)
             
             ''' MANUTENÇÃO '''
             butMaint = self.findChild(QtWidgets.QPushButton, 'pbMaint')
+            butMaint.setIcon(QtGui.QIcon(m_Image.Load_Image('Maint.png')))
             butMaint.clicked.connect(frmMaint.Ui_Maint)
             
             ''' CONFIGURAÇÃO '''
             butConfig = self.findChild(QtWidgets.QPushButton, 'pbConfig')
+            butConfig.setIcon(QtGui.QIcon(m_Image.Load_Image('Config.png')))
             butConfig.clicked.connect(frmConfig.Ui_Config)
                                 
             ''' ENCERRAR '''
             # Atribue controle a variável
             butEnd = self.findChild(QtWidgets.QPushButton, 'pbEnd')
+            butEnd.setIcon(QtGui.QIcon(m_Image.Load_Image('Exit.png')))
             butEnd.clicked.connect(m_Application.System_End)
             
             '''---------- LABEL ----------'''
             
             # Instância label título e modifica texto
-            lbTittle = self.findChild(QtWidgets.QLabel, 'lbTittle')
+            lbTittle = self.findChild(QtWidgets.QLabel, 'lbSystem')
             lbTittle.setText(m_Var.strSystem)
+            
+            # Usuário
+            lbUsuario = self.findChild(QtWidgets.QLabel, 'lbUserInformation')
+            lbUsuario.setText(m_Var.strUser)
+            
+            
                        
             # Hora Atual
-            self.lbHourMinute = self.findChild(QtWidgets.QLabel, 'lbTime')
+            self.lbTimer = self.findChild(QtWidgets.QLabel, 'lbHora')
             
             # Data Atual
-            self.lbDateNow = self.findChild(QtWidgets.QLabel, 'lbDate')
+            self.lbDate = self.findChild(QtWidgets.QLabel, 'lbData')
             
             # Imagem Brasil
             lbSystemBrasil = self.findChild(QtWidgets.QLabel, 'lbBrasil')
@@ -102,7 +114,7 @@ class Ui_Main(QtWidgets.QDialog):
             lbSystemMinimize.setPixmap(QPixmap(m_Image.Load_Image('Minimize.png')))
             
             # TODO Criar rotina para minimizar o form
-            #lbSystemMinimize.mousePressEvent = print("sdafasdaf") #m_Application.Form_Minimized(self)
+            #lbSystemMinimize.mousePressEvent = self.master.wm_state('iconic') #print("sdafasdaf") #m_Application.Form_Minimized(self)
             #self.setWindowFlags(QtCore.Qt.WindowMinimized)
             
              # Imagem CLOSE
@@ -122,13 +134,14 @@ class Ui_Main(QtWidgets.QDialog):
             def System_Information():
 
                 # Exibe HORA
-                self.lbHourMinute.setText(datetime.now().strftime("%H:%M")) #:%S" ) 
-                self.lbHourMinute.update()
-                self.lbHourMinute.repaint()
+                self.lbTimer.setText(datetime.now().strftime("%H:%M")) #:%S" ) 
+                self.lbTimer.update()
+                self.lbTimer.repaint()
+                
                 # Exibe DATA
-                self.lbDateNow.setText(datetime.now().strftime("%d/%m/%Y"))
-                self.lbDateNow.update()
-                self.lbDateNow.repaint()
+                self.lbDate.setText(datetime.now().strftime("%d/%m/%Y"))
+                self.lbDate.update()
+                self.lbDate.repaint()
                 
                 # Imagem DATABASE
                 if os.path.exists(m_Var.strDirSystem + "\\Database\\" + m_Var.strDatabaseFileName):
@@ -141,13 +154,13 @@ class Ui_Main(QtWidgets.QDialog):
                 lbSystemDatabase.setPixmap(QPixmap(m_Image.Load_Image(strDatabaseImage[0])))
                 lbSystemDatabase.setToolTip(strDatabaseImage[1])
 
+                # Carrega imagem caso exista erro no sistema
+                # TODO Refazer rotina para exibir mensagem erro
                 lbSystemError = self.findChild(QtWidgets.QLabel, 'lbErr')
                 if m_Var.blnError == True:
-                    
                     lbSystemError.setPixmap(QPixmap(m_Image.Load_Image('Error.png')))
                 else:
-                    
-                   pass
+                    pass
                 
             # Exibe hora:minuto no label
             timer = QTimer(self)

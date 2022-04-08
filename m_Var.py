@@ -5,7 +5,7 @@ import socket
 import m_Color
 
 ''' NOME DO USUÁRIO '''
-strUser = ""    
+strUser = "SYSTEM"    
 
 ''' NOME DO SISTEMA '''
 strSystem = "Bike - Estatísticas"
@@ -25,7 +25,6 @@ lstDirectory = ['DATABASE', 'EXPORT', 'IMPORT','LOG', 'ERR', 'ICONS', 'REPORT', 
 
 
 ''' BACKUP '''
-
 # Dias para guardar os arquivos de DADOS
 intBkpDays = 5
 
@@ -48,7 +47,7 @@ strDirSystem = os.getcwd()
 
 ''' CORES DO SISTEMA '''
 clrColorClear = "#f5f5f5"
-clrColorDark = "#01579b" #00695c"
+clrColorDark = "#004d40" #00695c"
 
 clrColor10 = m_Color.screenshades(clrColorDark,0.1)
 clrColor20 = m_Color.screenshades(clrColorDark,0.2)
@@ -65,7 +64,7 @@ clrFontDark = "#311b92"
 
 ''' FONTES DO SISTEMA '''
 #fntSystem font family, size, Weight, style
-fntSystem = 'Tahoma,14,normal,normal'
+fntSystem = 'Consolas,14,normal,normal'
 fntReport = 'Courier,9'
 
 
