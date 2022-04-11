@@ -89,6 +89,7 @@ class Ui_Main(QtWidgets.QDialog):
             
             '''---------- LABEL ----------'''
             
+            
             # Instância label título e modifica texto
             lbTittle = self.findChild(QtWidgets.QLabel, 'lbSystem')
             lbTittle.setText(m_Var.strSystem)
