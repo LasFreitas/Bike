@@ -96,8 +96,6 @@ class Ui_Main(QtWidgets.QDialog):
             # Usuário
             lbUsuario = self.findChild(QtWidgets.QLabel, 'lbUserInformation')
             lbUsuario.setText(m_Var.strUser)
-            
-            
                        
             # Hora Atual
             self.lbTimer = self.findChild(QtWidgets.QLabel, 'lbHora')
@@ -120,11 +118,19 @@ class Ui_Main(QtWidgets.QDialog):
              # Imagem CLOSE
             lbSystemClose = self.findChild(QtWidgets.QLabel, 'lbClose')
             lbSystemClose.setPixmap(QPixmap(m_Image.Load_Image('Close.png')))
-            # TODO Verificar rotina para fechar form
+            
+            # FIXME Verificar rotina para fechar form
+            # FIXME ESTÁ APARECENDO ESTE ERRO: TypeError: System_End() takes 0 positional arguments but 1 was given
             lbSystemClose.mousePressEvent = m_Application.System_End
            
             # Define titulo do form principal
             #self.setWindowTitle(m_Var.strSystem.upper())
+                  
+                  
+                  
+                  
+                  
+                  
                                                         
             # Configura o form      
             m_Form.Form_Config(self)   
