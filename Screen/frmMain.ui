@@ -67,6 +67,9 @@
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
+      <property name="toolTip">
+       <string>Cadastro de Ciclistas</string>
+      </property>
       <property name="accessibleName">
        <string>BUT|FB|FS15</string>
       </property>
@@ -95,6 +98,9 @@
      <widget class="QPushButton" name="pbBike">
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="toolTip">
+       <string>Cadastro de Bicicletas</string>
       </property>
       <property name="accessibleName">
        <string>BUT|FB|FS15</string>
@@ -125,6 +131,9 @@
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
+      <property name="toolTip">
+       <string>Dados do Percurso</string>
+      </property>
       <property name="accessibleName">
        <string>BUT|FB|FS15</string>
       </property>
@@ -148,6 +157,9 @@
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
+      <property name="toolTip">
+       <string>Manutenção da Bicicleta</string>
+      </property>
       <property name="accessibleName">
        <string>BUT|FB|FS15</string>
       </property>
@@ -170,6 +182,9 @@
      <widget class="QPushButton" name="pbConfig">
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="toolTip">
+       <string>Configuração do Sistema</string>
       </property>
       <property name="accessibleName">
        <string>BUT|FB|FS15</string>
@@ -196,6 +211,9 @@
      <widget class="QPushButton" name="pbEnd">
       <property name="cursor">
        <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="toolTip">
+       <string>Encerrar Sistema</string>
       </property>
       <property name="accessibleName">
        <string>BUT|FB|FS15</string>

@@ -50,10 +50,23 @@ class Ui_Main(QtWidgets.QDialog):
                         
              # Esconde a barra de título
             self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+            
+            '''---------- TITTLE BAR ----------'''
+            
+            # Atribue controle MINIMIZE TITTLEBAR a variável
+            butMinimize = self.findChild(QtWidgets.QPushButton, 'btMinimize')
+            butMinimize.setIcon(QtGui.QIcon(m_Image.Load_Image('Minimize.png')))
+            butMinimize.clicked.connect(self.showMinimized)
+                        
+             # Atribue controle CLOSE TITTLEBAR a variável
+            butEndX = self.findChild(QtWidgets.QPushButton, 'btEnd')
+            butEndX.setIcon(QtGui.QIcon(m_Image.Load_Image('Close.png')))
+            butEndX.clicked.connect(m_Application.System_End)
+                     
            
             '''---------- BUTTON ----------'''
             
-            ''' USUÁRIO '''
+            ''' CICLISTA '''
             butUser = self.findChild(QtWidgets.QPushButton, 'pbUser')
             butUser.setIcon(QtGui.QIcon(m_Image.Load_Image('Cyclist.png')))
             butUser.clicked.connect(frmUser.Ui_User)
@@ -83,20 +96,7 @@ class Ui_Main(QtWidgets.QDialog):
             butEnd = self.findChild(QtWidgets.QPushButton, 'pbEnd')
             butEnd.setIcon(QtGui.QIcon(m_Image.Load_Image('Exit.png')))
             butEnd.clicked.connect(m_Application.System_End)
-            
-           
-            '''---------- TITTLE BAR ----------'''
-            
-            # Atribue controle MINIMIZE TITTLEBAR a variável
-            butMinimize = self.findChild(QtWidgets.QPushButton, 'btMinimize')
-            butMinimize.setIcon(QtGui.QIcon(m_Image.Load_Image('Minimize.png')))
-            butMinimize.clicked.connect(self.showMinimized)
-                        
-             # Atribue controle CLOSE TITTLEBAR a variável
-            butEndX = self.findChild(QtWidgets.QPushButton, 'btEnd')
-            butEndX.setIcon(QtGui.QIcon(m_Image.Load_Image('Close.png')))
-            butEndX.clicked.connect(m_Application.System_End)
-                        
+                                    
             '''---------- LABEL ----------'''
             
             # Instância label título e modifica texto
@@ -119,7 +119,16 @@ class Ui_Main(QtWidgets.QDialog):
                       
             # Define titulo do form principal
             # self.setWindowTitle(m_Var.strSystem.upper())
-                                                        
+            
+            '''---------- STATUS BAR ----------'''
+            
+            # Barra de Porcentagem
+            pbPercentBar = self.findChild(QtWidgets.QProgressBar, 'pbPercent')
+            pbPercentBar.setValue(0)
+            pbPercentBar.hide()
+            
+            '''---------- CONFIGURAÇÃO DO FORM ----------'''
+                                                    
             # Configura o form      
             m_Form.Form_Config(self)   
                       
