@@ -79,17 +79,24 @@ class Ui_Main(QtWidgets.QDialog):
             butConfig.clicked.connect(frmConfig.Ui_Config)
                                 
             ''' ENCERRAR '''
-            # Atribue controle a variável
+            # Atribue controle BUTTON a variável
             butEnd = self.findChild(QtWidgets.QPushButton, 'pbEnd')
             butEnd.setIcon(QtGui.QIcon(m_Image.Load_Image('Exit.png')))
             butEnd.clicked.connect(m_Application.System_End)
             
-             # Atribue controle a variável
+           
+            '''---------- TITTLE BAR ----------'''
+            
+            # Atribue controle MINIMIZE TITTLEBAR a variável
+            butMinimize = self.findChild(QtWidgets.QPushButton, 'btMinimize')
+            butMinimize.setIcon(QtGui.QIcon(m_Image.Load_Image('Minimize.png')))
+            butMinimize.clicked.connect(self.showMinimized)
+                        
+             # Atribue controle CLOSE TITTLEBAR a variável
             butEndX = self.findChild(QtWidgets.QPushButton, 'btEnd')
             butEndX.setIcon(QtGui.QIcon(m_Image.Load_Image('Close.png')))
             butEndX.clicked.connect(m_Application.System_End)
-            
-            
+                        
             '''---------- LABEL ----------'''
             
             # Instância label título e modifica texto
@@ -109,33 +116,9 @@ class Ui_Main(QtWidgets.QDialog):
             # Imagem Brasil
             lbSystemBrasil = self.findChild(QtWidgets.QLabel, 'lbBrasil')
             lbSystemBrasil.setPixmap(QPixmap(m_Image.Load_Image('Brasil.png')))           
-                       
-            # Imagem Minimize
-            lbSystemMinimize = self.findChild(QtWidgets.QLabel, 'lbMinimize')
-            lbSystemMinimize.setPixmap(QPixmap(m_Image.Load_Image('Minimize.png')))
-            
-            # TODO Criar rotina para minimizar o form
-            #lbSystemMinimize.mousePressEvent = self.master.wm_state('iconic') #print("sdafasdaf") #m_Application.Form_Minimized(self)
-            #self.setWindowFlags(QtCore.Qt.WindowMinimized)
-            
-             # Imagem CLOSE
-            #lbSystemClose = self.findChild(QtWidgets.QLabel, 'lbClose')
-            #lbSystemClose.setPixmap(QPixmap(m_Image.Load_Image('Close.png')))
-            
-            # FIXME Verificar rotina para fechar form
-            # FIXME ESTÁ APARECENDO ESTE ERRO: TypeError: System_End() takes 0 positional arguments but 1 was given
-           # lbSystemClose.mousePressEvent = QTimer.singleShot(5000, lambda: QTest.mouseClick(butEnd, Qt.LeftButton, delay=100))
-           
-           #self.butEnd.click #m_Application.System_End #..mousePressEvent = m_Application.System_End
-           
+                      
             # Define titulo do form principal
-            #self.setWindowTitle(m_Var.strSystem.upper())
-                  
-                  
-                  
-                  
-                  
-                  
+            # self.setWindowTitle(m_Var.strSystem.upper())
                                                         
             # Configura o form      
             m_Form.Form_Config(self)   
