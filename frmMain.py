@@ -9,17 +9,14 @@ import time
 import traceback
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
-#from PyQt5 import QtCore, QtWidgets, uic, Qt
+
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QDialog,
                              QListWidgetItem, QMainWindow, QTableWidgetItem,
                              QWidget)
 from datetime import datetime
-#from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui
-#from PyQt5.QtGui import QIcon, QPixmap
-#from PyQt5.QtGui import *
-#from PyQt5.QtWidgets import *
-from PyQt5.QtCore import * 
 
+from PyQt5.QtCore import * 
+from PyQt5.QtTest import QTest
 
 
 # imports locais
@@ -87,8 +84,13 @@ class Ui_Main(QtWidgets.QDialog):
             butEnd.setIcon(QtGui.QIcon(m_Image.Load_Image('Exit.png')))
             butEnd.clicked.connect(m_Application.System_End)
             
-            '''---------- LABEL ----------'''
+             # Atribue controle a variável
+            butEndX = self.findChild(QtWidgets.QPushButton, 'btEnd')
+            butEndX.setIcon(QtGui.QIcon(m_Image.Load_Image('Close.png')))
+            butEndX.clicked.connect(m_Application.System_End)
             
+            
+            '''---------- LABEL ----------'''
             
             # Instância label título e modifica texto
             lbTittle = self.findChild(QtWidgets.QLabel, 'lbSystem')
@@ -117,12 +119,14 @@ class Ui_Main(QtWidgets.QDialog):
             #self.setWindowFlags(QtCore.Qt.WindowMinimized)
             
              # Imagem CLOSE
-            lbSystemClose = self.findChild(QtWidgets.QLabel, 'lbClose')
-            lbSystemClose.setPixmap(QPixmap(m_Image.Load_Image('Close.png')))
+            #lbSystemClose = self.findChild(QtWidgets.QLabel, 'lbClose')
+            #lbSystemClose.setPixmap(QPixmap(m_Image.Load_Image('Close.png')))
             
             # FIXME Verificar rotina para fechar form
             # FIXME ESTÁ APARECENDO ESTE ERRO: TypeError: System_End() takes 0 positional arguments but 1 was given
-            lbSystemClose.mousePressEvent = m_Application.System_End
+           # lbSystemClose.mousePressEvent = QTimer.singleShot(5000, lambda: QTest.mouseClick(butEnd, Qt.LeftButton, delay=100))
+           
+           #self.butEnd.click #m_Application.System_End #..mousePressEvent = m_Application.System_End
            
             # Define titulo do form principal
             #self.setWindowTitle(m_Var.strSystem.upper())
@@ -179,6 +183,7 @@ class Ui_Main(QtWidgets.QDialog):
         except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc())
+
 
 
 def main():

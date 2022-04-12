@@ -3,15 +3,16 @@
 
 # imports
 import traceback
-from PyQt5 import QtWidgets, uic, QtCore
+from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import * #QApplication, QMainWindow, QListWidgetItem, QTableWidgetItem, QDialog, QDesktopWidget, QWidget,QGroupBox, QPushButton,QFontComboBox,QFontDialog
-from PyQt5.QtGui import QColor, QFont
+from PyQt5.QtGui import QColor, QFont, QPixmap
 
 # imports locais
 import m_Var
 import m_Err
 import m_Color
 import m_Form
+import m_Image
 
  # Definição de variáveis
        
@@ -74,7 +75,7 @@ def Form_Config(objForm):
                         
                    elif type(objForm[1]) == QPushButton: # QPUSHBUTTON
                     
-                        objForm[1].setStyleSheet('QPushButton {'   
+                        objForm[1].setStyleSheet('QPushButton {' 
                                     + 'font-family:' + fntControlFamily + ';' 
                                     + 'font-size:' +  fntControlSize + 'px ;'
                                     + 'font-Weight:' + fntControlWeigth + ';'

@@ -19,7 +19,8 @@ import m_Err
 def System_End():
     
     try:
-       sys.exit()
+      quit()
+      #sys.exit()
     
     except Exception as e:
        # Atualiza arquivo de erro com o erro ocorrido

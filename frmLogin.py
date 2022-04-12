@@ -28,10 +28,11 @@ class Ui_Login(QtWidgets.QDialog):
             
             
             '''---------- FORM ----------'''
-            
             # Define cor de fundo do form  
             self.setStyleSheet("QDialog { background-color:" + m_Var.clrColorDark +" }");
-          
+           
+            # Esconde a barra de título
+            self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
             
             # Desativa botão de help na barra de título do form
             self.setWindowFlag(QtCore.Qt.WindowContextHelpButtonHint,False)  
@@ -41,6 +42,7 @@ class Ui_Login(QtWidgets.QDialog):
                      
             
             '''---------- BUTTON ----------'''
+           
             ''' ENCERRAR '''
             # Atribue controle a variável
             # butExit = self.ui.findChild(QtWidgets.QPushButton, 'pbExit')
@@ -69,9 +71,11 @@ class Ui_Login(QtWidgets.QDialog):
             self.lbPassword.returnPressed.connect(self.Key_Return)
             
             
+            # Configura o form      
+            m_Form.Form_Config(self)   
            
            
-
+          
 
         except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
