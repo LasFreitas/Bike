@@ -123,7 +123,7 @@ class Ui_Main(QtWidgets.QDialog):
             # Configura o form      
             m_Form.Form_Config(self)   
                       
-                      
+                   
             # Função para atualizar informações do sistema
             def System_Information():
 
@@ -139,10 +139,16 @@ class Ui_Main(QtWidgets.QDialog):
                 
                 # Imagem DATABASE
                 if os.path.exists(m_Var.strDirSystem + "\\Database\\" + m_Var.strDatabaseFileName):
+                    # Carrega imagem e atualiza tooltip
                     strDatabaseImage = ["DBOn.png" , "Database Online"]
+                    # Habilita os botões
+                    Button_Enabled(True)
                 else:
+                    # Carrega imagem e atualiza tooltip
                     strDatabaseImage = ["DBOff.png" , "Database Offline"]
-                
+                    # Desabilita os botões
+                    Button_Enabled(False)
+                    
                 # Carrega IMAGEM e atualiza tooltip
                 lbSystemDatabase = self.findChild(QtWidgets.QLabel, 'lbDatabase')
                 lbSystemDatabase.setPixmap(QPixmap(m_Image.Load_Image(strDatabaseImage[0])))
@@ -155,6 +161,20 @@ class Ui_Main(QtWidgets.QDialog):
                     lbSystemError.setPixmap(QPixmap(m_Image.Load_Image('Error.png')))
                 else:
                     pass
+            
+            # Função para Habilitar / Desabilitar botões
+            def Button_Enabled(blnBool):
+                try:
+                    # Habilita/Desabilita os botões conforme a necessidade do sistema
+                    butUser.setEnabled(blnBool)     # USER
+                    butBike.setEnabled(blnBool)     # BIKE
+                    butData.setEnabled(blnBool)     # DADOS
+                    butMaint.setEnabled(blnBool)    # MANUTENÇÃO
+                    butConfig.setEnabled(blnBool)   # CONFIGURAÇÃO
+                    
+                except Exception as e:
+                    # Atualiza arquivo de erro com o erro ocorrido
+                    m_Err.printErr(traceback.format_exc())    
                 
             # Exibe hora:minuto no label
             timer = QTimer(self)
@@ -182,14 +202,7 @@ def main():
                 
         QTimer.singleShot(500,frmLogin.main())
         
-      
-
-           
-        
         app.exec_()
-              
-        
-        
     
     except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
