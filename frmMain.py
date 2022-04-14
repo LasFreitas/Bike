@@ -135,7 +135,7 @@ class Ui_Main(QtWidgets.QDialog):
                    
             # Função para atualizar informações do sistema
             def System_Information():
-
+                
                 # Exibe HORA
                 self.lbTimer.setText(datetime.now().strftime("%H:%M")) #:%S" ) 
                 self.lbTimer.update()
@@ -173,6 +173,7 @@ class Ui_Main(QtWidgets.QDialog):
             
             # Função para Habilitar / Desabilitar botões
             def Button_Enabled(blnBool):
+                
                 try:
                     # Habilita/Desabilita os botões conforme a necessidade do sistema
                     butUser.setEnabled(blnBool)     # USER
