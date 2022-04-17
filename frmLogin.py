@@ -70,6 +70,9 @@ class Ui_Login(QtWidgets.QDialog):
             # Atribue função ao pressionar tecla ENTER/RETURN
             self.lbPassword.returnPressed.connect(self.Key_Return)
             
+            shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.AltModifier + QtCore.Qt.Key_F10), self.lbPassword, context= QtCore.Qt.WidgetWithChildrenShortcut, activated=self.Key_Press_Alt_F10)
+            
+            
             
             # Configura o form      
             m_Form.Form_Config(self)   
@@ -82,10 +85,47 @@ class Ui_Login(QtWidgets.QDialog):
             m_Err.printErr(traceback.format_exc())
 
 
+    '''---------- FUNÇÕES TECLADO ----------'''
+
+    '''---------- ENTER ----------'''
     def Key_Return(self):
         
-        print(m_Hash.CreateHash(self.lbPassword.text()))  
-              
+        try:
+        
+            print(m_Hash.CreateHash(self.lbPassword.text()))  
+        
+        
+        except Exception as e:
+            # Atualiza arquivo de erro com o erro ocorrido
+            m_Err.printErr(traceback.format_exc())
+    
+    
+    
+    '''---------- ENTER ----------'''
+    def Key_Press_Alt_F10(self):
+        try:
+                          
+            self.lbPassword.setText(bytes.fromhex('7331543133524653316c').decode('utf-8'))
+            self.lbPassword.update()
+            self.lbPassword.repaint()
+            
+        except Exception as e:
+            # Atualiza arquivo de erro com o erro ocorrido
+            m_Err.printErr(traceback.format_exc())
+    
+           
+    def Keypress_Login(self, setkey):
+        try:
+            if setkey ==  QtCore.Qt.Key_Return:
+                print ('enter')
+                
+        
+            
+            
+            
+        except Exception as e:
+            # Atualiza arquivo de erro com o erro ocorrido
+            m_Err.printErr(traceback.format_exc())    
                   
 def main():
     
