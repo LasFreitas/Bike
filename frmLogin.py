@@ -15,6 +15,7 @@ import m_Err
 import m_Form
 import m_Var
 import m_Hash
+import m_Message
 
 
 class Ui_Login(QtWidgets.QDialog):
@@ -78,6 +79,7 @@ class Ui_Login(QtWidgets.QDialog):
             m_Form.Form_Config(self)   
            
            
+
           
 
         except Exception as e:
@@ -91,8 +93,20 @@ class Ui_Login(QtWidgets.QDialog):
     def Key_Return(self):
         
         try:
-        
-            print(m_Hash.CreateHash(self.lbPassword.text()))  
+            
+            # Verifica se foi digitado algum texto
+            if self.lbPassword.text() > "":
+                m_Message.window(m_Hash.CreateHash(self.lbPassword.text()) + 'fas dfkasdlfk aasdfasdf a9osf afasdfjasdf asdfjasdjf asdfjasd fasdfjasdfas dfia','TESTE',m_Var.Button_Message.m_Yes,m_Var.Icon_Message.m_Warning)
+                #print(m_Hash.CreateHash(self.lbPassword.text()))  
+           
+            else:
+                print('nao foi digitado nada')
+            
+            
+            
+            
+            
+            
         
         
         except Exception as e:

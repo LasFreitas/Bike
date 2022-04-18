@@ -99,6 +99,13 @@ class Ui_Main(QtWidgets.QDialog):
                                     
             '''---------- LABEL ----------'''
             
+             # Icone System
+            lbIconSys = self.findChild(QtWidgets.QLabel, 'lbIconSys')
+            lbIconSys.setPixmap(QPixmap(m_Image.Load_Image('BikeSys.png')))   
+            
+            
+            
+            
             # Instância label título e modifica texto
             lbTittle = self.findChild(QtWidgets.QLabel, 'lbSystem')
             lbTittle.setText(m_Var.strSystem)

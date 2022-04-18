@@ -1,5 +1,6 @@
 import os
 import socket  
+import enum
 
 
 import m_Color
@@ -47,7 +48,7 @@ strDirSystem = os.getcwd()
 
 ''' CORES DO SISTEMA '''
 clrColorClear = "#f5f5f5"
-clrColorDark = "#004d40" #00695c"
+clrColorDark = "#fdd835" #00695c"
 
 clrColor10 = m_Color.screenshades(clrColorDark,0.1)
 clrColor20 = m_Color.screenshades(clrColorDark,0.2)
@@ -66,6 +67,28 @@ clrFontDark = "#311b92"
 #fntSystem font family, size, Weight, style
 fntSystem = 'Consolas,14,normal,normal'
 fntReport = 'Courier,9'
+
+
+
+''' MESSAGEBOX '''
+class Button_Message(enum.Enum):
+   # Método de criação de MessageBox
+   m_OK = 0
+   m_OkCancel = 1
+   m_Yes = 2
+   m_YesNo = 3
+   m_Open = 4
+   m_Save = 5
+      
+class Icon_Message(enum.Enum):
+   m_Critical = 0
+   m_Warning = 1
+   m_Information = 2
+   m_Question = 3
+
+
+
+
 
 
 ''' FUNÇÃO ATRIBUIÇÃO NOME DO USUÁRIO A VARIÁVEL '''
