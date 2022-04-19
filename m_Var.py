@@ -79,6 +79,7 @@ class Button_Message(enum.Enum):
    m_YesNo = 3
    m_Open = 4
    m_Save = 5
+   m_NoButton = 10
       
 class Icon_Message(enum.Enum):
    m_Critical = 0

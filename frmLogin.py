@@ -96,11 +96,17 @@ class Ui_Login(QtWidgets.QDialog):
             
             # Verifica se foi digitado algum texto
             if self.lbPassword.text() > "":
-                m_Message.window(m_Hash.CreateHash(self.lbPassword.text()) + 'fas dfkasdlfk aasdfasdf a9osf afasdfjasdf asdfjasdjf asdfjasd fasdfjasdfas dfia','TESTE',m_Var.Button_Message.m_Yes,m_Var.Icon_Message.m_Warning)
-                #print(m_Hash.CreateHash(self.lbPassword.text()))  
+                
+                print(m_Hash.CreateHash(self.lbPassword.text()))  
            
             else:
-                print('nao foi digitado nada')
+                # Exibe mensagem ao usuário que campo não pode ser branco
+                if m_Message.window('DIGITE A SENHA DO USUÁRIO','', m_Var.Button_Message.m_NoButton,m_Var.Icon_Message.m_Warning) == True:
+                    self.lbPassword.setfocus()
+                
+                
+                
+                #print('nao foi digitado nada')
             
             
             

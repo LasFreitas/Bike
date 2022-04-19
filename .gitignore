@@ -9,6 +9,7 @@ Err/
 Icons/
 Log/
 Backup/
+autohide.py
 
 
 # Arquivos a serem ignorados
