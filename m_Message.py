@@ -1,109 +1,183 @@
+# !/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+
+# imports
 import sys
+import enum
 import traceback
-import time
+
+from PyQt5 import QtCore
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, QDialog
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import pyqtSlot, QTimer
-from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
 
-from enum import Enum
-
-# imports locais
+# imports Locais
 import m_Var
-import m_Image
 import m_Err
-  
-
-def window(strMessage, strTittle = m_Var.strSystem, typeButtons = m_Var.Button_Message.m_OkCancel, typeIcon = m_Var.Icon_Message.m_Information):
-
-    #app = QApplication(sys.argv)
 
 
-    msgBox = QMessageBox()
-    msgBox.setWindowIcon(QtGui.QIcon(m_Image.Load_Image('BikeSys.png')))
 
-    msgBox.setText(strMessage)
+''' VARIÁVEIS '''
+blnTmr = False
+strMensagem = ""
+
+
+''' DICIONÁRIO DE MENSAGEM PADRÃO '''
+
+dictMessage = {
+                # ''' PASSWORD '''
+                '*DSS': 'DIGITE A SUA SENHA',
+                
+                
+                # ''' USUÁRIO '''
+                '*UNC': 'USUÁRIO NÃO CADASTRADO',
+
+                
+                # ''' FIELD '''
+                '*CPO': 'CAMPO DE PREENCHIMENTO OBRIGATÓRIO'
+                
+                }
+
+
+
+
+
+''' MESSAGEBOX '''
+class Button_Message(enum.Enum):
+   # Método de criação de MessageBox
+   m_OK = 0
+   m_OkCancel = 1
+   m_Yes = 2
+   m_YesNo = 3
+   m_Open = 4
+   m_Save = 5
+   m_NoButton = 10
+      
+class Icon_Message(enum.Enum):
+   m_Critical = 0
+   m_Warning = 1
+   m_Information = 2
+   m_Question = 3
+
+
+class Message_Box(QMessageBox):
     
-    
-    # Verifica se foi passado o título da mensagem
-    if strTittle == '':
-      strTittle = m_Var.strSystem
-    
-    
-    msgBox.setWindowTitle(strTittle)
+    try:
 
-    if typeIcon.value == 0:
-        msgBox.setIcon(QMessageBox.Critical)
-    elif typeIcon.value == 1:
-        msgBox.setIcon(QMessageBox.Warning)
-    elif typeIcon.value == 2:
-        msgBox.setIcon(QMessageBox.Information)
-    elif typeIcon.value == 3:
-        msgBox.setIcon(QMessageBox.Question)
+        '''---------- PARÂMETROS ----------'''
+        '''
+            strTittle - Título do QMessageBox
+            strMessage - Mensagem do QMessageBox
+            typeIcon - Tipo de Icon
+            typeButton - Tipo dos botões
+            blnTimer = Boolean para apresentação de contagem regressiva
+        
+        '''
 
-
-    # Verifica qual(is) botão(ões) será(ão) exibido(s)
-    if typeButtons.value == 0:
-        msgBox.setStandardButtons(QMessageBox.Ok)
-    elif typeButtons.value == 1:
-        msgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel) 
-    elif typeButtons.value == 2:
-           msgBox.setStandardButtons(QMessageBox.Yes)     
-    elif typeButtons.value == 3:
-           msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)     
-    elif typeButtons.value == 4:
-           msgBox.setStandardButtons(QMessageBox.Open)  
-    elif typeButtons.value == 5:
-           msgBox.setStandardButtons(QMessageBox.Save)  
-    elif typeButtons.value == 10:
-           msgBox.setStandardButtons(QMessageBox.NoButton) 
-           
-           
-
-
-    if typeButtons.value == 10:
+        try:
+        
+            def __init__(self, strTittle , strMessage , typeIcon = Icon_Message, typeButton = Button_Message, blnTimer = False,  timeout=5, parent=None):
+            
+                super(Message_Box, self).__init__(parent)
+            
+                # Atualiza título do QMessageBox
+                self.setWindowTitle(strTittle)
+                
+                # Atualiza tempo de espera
+                self.time_to_wait = timeout
+                    
+                # Verifica qual o ícone a ser exibido
+                if typeIcon.value == 0:
+                    self.setIcon(QMessageBox.Critical)
+                elif typeIcon.value == 1:
+                    self.setIcon(QMessageBox.Warning)
+                elif typeIcon.value == 2:
+                    self.setIcon(QMessageBox.Information)
+                elif typeIcon.value == 3:
+                    self.setIcon(QMessageBox.Question)
+                        
+                # Verifica qual(is) botão(ões) será(ão) exibido(s)
+                if typeButton.value == 0:
+                    self.setStandardButtons(QMessageBox.Ok)
+                elif typeButton.value == 1:
+                    self.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel) 
+                elif typeButton.value == 2:
+                    self.setStandardButtons(QMessageBox.Yes)     
+                elif typeButton.value == 3:
+                    self.setStandardButtons(QMessageBox.Yes | QMessageBox.No)     
+                elif typeButton.value == 4:
+                    self.setStandardButtons(QMessageBox.Open)  
+                elif typeButton.value == 5:
+                    self.setStandardButtons(QMessageBox.Save)  
+                elif typeButton.value == 10:
+                    self.setStandardButtons(QMessageBox.NoButton) 
+            
+                    self.timer = QtCore.QTimer(self)
+                    self.timer.setInterval(1000)
+                    self.timer.timeout.connect(self.changeContent)
+                    self.timer.start()
+                
+            
+                # Atualiza texto da mensagem a ser exibida
+                global strMensagem
+                # Verifica se é mensagem padrão ou mensagem definida pelo usuário
+                if strMessage[0] == '*':
+                    
+                    # Verifica se existe a mensagem no dicionário
+                    if strMessage in dictMessage:
+                        # Existe no dicionário e atualiza a mensagem
+                        strMensagem = dictMessage[strMessage]    
+                    else:
+                        # Não existe a mensagem
+                        strMensagem = "MENSAGEM NÃO CADASTRADA NO DICIONÁRIO!"
+                else:
+                    # Atualiza mensagem com a mensagem enviada
+                    strMensagem = strMessage
+                
+                
+                
+                
+            
+                # Atualiza a variável com o novo valor
+                global blnTmr
+                blnTmr = blnTimer
+                        
+                # Atualiza mensagem a ser exibida
+                self.setText(strMensagem.upper())
+                
+        except Exception as e:
+                # Atualiza arquivo de erro com o erro ocorrido
+                m_Err.printErr(traceback.format_exc())  
+        
+            
+        def changeContent(self):
+            try:
+                # Verifica se é para mostrar contagem regressiva
+                if blnTmr == True:
+                    self.setText(strMensagem.upper() + " [" + str(self.time_to_wait) + "]")
+                else:
+                    self.setText(strMensagem.upper())
+            
+                self.time_to_wait -= 1
+        
+                if self.time_to_wait <= 0:
+                    self.close()
+            
+            except Exception as e:
+                    # Atualiza arquivo de erro com o erro ocorrido
+                    m_Err.printErr(traceback.format_exc()) 
         
         
-        #msgBox.exec_()
-               
-        QTimer.singleShot(2000, msgBox.exec(), msgBox.accept())
-#
-# 
-# QTimer.singleShot(5000,  msgBox.done(1))
+        def closeEvent(self, event):
+            try:
         
+                self.timer.stop()
+                event.accept()
         
-        
-        #QTimer.singleShot(50,  msgBox.accept())
-        
-        
-        print(True)
-        
-    else:
-        ReturnMSG = msgBox.exec_()
+            except Exception as e:
+                    # Atualiza arquivo de erro com o erro ocorrido
+                    m_Err.printErr(traceback.format_exc()) 
 
-        if ReturnMSG == QMessageBox.Ok:
-            print(True)
-        elif ReturnMSG == QMessageBox.Cancel:
-            print(False)
-        else:
-            pass    
-    
-
-
-
-    
-    
-    
-    
-   
-    
-   
-  
-  
-  
-  
-  #print("Button clicked is:",i.text())
-
-
-
-
+    except Exception as e:
+            # Atualiza arquivo de erro com o erro ocorrido
+            m_Err.printErr(traceback.format_exc()) 

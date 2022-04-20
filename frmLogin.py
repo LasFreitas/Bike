@@ -101,8 +101,15 @@ class Ui_Login(QtWidgets.QDialog):
            
             else:
                 # Exibe mensagem ao usuário que campo não pode ser branco
-                if m_Message.window('DIGITE A SENHA DO USUÁRIO','', m_Var.Button_Message.m_NoButton,m_Var.Icon_Message.m_Warning) == True:
-                    self.lbPassword.setfocus()
+                
+                
+                lixo = m_Message.Message_Box(m_Var.strSystem, '*DSS',m_Message.Icon_Message.m_Warning,m_Message.Button_Message.m_NoButton, True, 5)
+                lixo.exec_()
+                
+                
+                
+              #  if m_Message.window('DIGITE A SENHA DO USUÁRIO','', m_Message.Button_Message.m_NoButton,m_Message.Icon_Message.m_Warning,) == True:
+               #     self.lbPassword.setfocus()
                 
                 
                 

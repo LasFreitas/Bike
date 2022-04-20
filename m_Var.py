@@ -70,22 +70,7 @@ fntReport = 'Courier,9'
 
 
 
-''' MESSAGEBOX '''
-class Button_Message(enum.Enum):
-   # Método de criação de MessageBox
-   m_OK = 0
-   m_OkCancel = 1
-   m_Yes = 2
-   m_YesNo = 3
-   m_Open = 4
-   m_Save = 5
-   m_NoButton = 10
-      
-class Icon_Message(enum.Enum):
-   m_Critical = 0
-   m_Warning = 1
-   m_Information = 2
-   m_Question = 3
+
 
 
 
