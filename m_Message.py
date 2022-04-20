@@ -34,7 +34,10 @@ dictMessage = {
 
                 
                 # ''' FIELD '''
-                '*CPO': 'CAMPO DE PREENCHIMENTO OBRIGATÓRIO'
+                '*CPO': 'CAMPO DE PREENCHIMENTO OBRIGATÓRIO!',
+                '*JC': 'JÁ CADASTRADO(A)!',
+                '*PNCD': 'PESQUISANDO NOVO CÓDIGO DISPONÍVEL:',
+                '*CP': 'CARACTER(ES) PERMITIDO(S): '
                 
                 }
 
@@ -120,6 +123,7 @@ class Message_Box(QMessageBox):
             
                 # Atualiza texto da mensagem a ser exibida
                 global strMensagem
+                
                 # Verifica se é mensagem padrão ou mensagem definida pelo usuário
                 if strMessage[0] == '*':
                     
@@ -129,12 +133,11 @@ class Message_Box(QMessageBox):
                         strMensagem = dictMessage[strMessage]    
                     else:
                         # Não existe a mensagem
-                        strMensagem = "MENSAGEM NÃO CADASTRADA NO DICIONÁRIO!"
+                        strMensagem = "MENSAGEM NÃO CADASTRADA NO DICIONÁRIO! \n\n ENTRE EN CONTATO COM O ADMINISTRADOR."
                 else:
                     # Atualiza mensagem com a mensagem enviada
                     strMensagem = strMessage
-                
-                
+                           
                 
                 
             
@@ -152,14 +155,22 @@ class Message_Box(QMessageBox):
             
         def changeContent(self):
             try:
+                
                 # Verifica se é para mostrar contagem regressiva
                 if blnTmr == True:
+                    
+                    # Atualiza a mensagem com a contagem de tempo regressivo
                     self.setText(strMensagem.upper() + " [" + str(self.time_to_wait) + "]")
+                    
                 else:
+                    
+                    # Atualiza a mensagem
                     self.setText(strMensagem.upper())
             
+                # Diminui o tempo de exibição
                 self.time_to_wait -= 1
         
+                # Verifica se já encerrou o tempo
                 if self.time_to_wait <= 0:
                     self.close()
             
