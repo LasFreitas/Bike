@@ -103,25 +103,10 @@ class Ui_Login(QtWidgets.QDialog):
                 # Exibe mensagem ao usuário que campo não pode ser branco
                 
                 
-                lixo = m_Message.Message_Box(m_Var.strSystem, '*DSS',m_Message.Icon_Message.m_Warning,m_Message.Button_Message.m_NoButton, True, 5)
+                lixo = m_Message.Message_Box(m_Var.strSystem, '*DSS', m_Message.Icon_Message.m_Warning, m_Message.Button_Message.m_NoButton, True, 5)
                 lixo.exec_()
                 
-                
-                
-              #  if m_Message.window('DIGITE A SENHA DO USUÁRIO','', m_Message.Button_Message.m_NoButton,m_Message.Icon_Message.m_Warning,) == True:
-               #     self.lbPassword.setfocus()
-                
-                
-                
-                #print('nao foi digitado nada')
-            
-            
-            
-            
-            
-            
-        
-        
+                             
         except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc())

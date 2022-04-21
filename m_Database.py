@@ -7,7 +7,7 @@ import m_Err
 
 
 # Cria conexão com o BD e retorna conexão
-def createConnection(databasefile):
+def CreateConnection(databasefile):
            
     # Inicializa a variável    
     connDB = None

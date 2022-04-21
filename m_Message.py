@@ -9,6 +9,7 @@ import traceback
 
 from PyQt5 import QtCore
 from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, QDialog
 
 # imports Locais
@@ -20,13 +21,17 @@ import m_Err
 ''' VARIÁVEIS '''
 blnTmr = False
 strMensagem = ""
+strTitulo = ""
 
 
 ''' DICIONÁRIO DE MENSAGEM PADRÃO '''
 
 dictMessage = {
+                # ''' SYSTEM '''
+    
+    
                 # ''' PASSWORD '''
-                '*DSS': 'DIGITE A SUA SENHA',
+                '*DSS': 'DIGITE A SENHA DO USUÁRIO!',
                 
                 
                 # ''' USUÁRIO '''
@@ -79,10 +84,14 @@ class Message_Box(QMessageBox):
 
         try:
         
-            def __init__(self, strTittle , strMessage , typeIcon = Icon_Message, typeButton = Button_Message, blnTimer = False,  timeout=5, parent=None):
+            def __init__(self, strTittle, strMessage, typeIcon = Icon_Message, typeButton = Button_Message, blnTimer = False,  timeout=5, parent=None):
             
                 super(Message_Box, self).__init__(parent)
             
+            
+                global strTitulo
+                strTitulo = strTittle
+                
                 # Atualiza título do QMessageBox
                 self.setWindowTitle(strTittle)
                 
@@ -159,8 +168,11 @@ class Message_Box(QMessageBox):
                 # Verifica se é para mostrar contagem regressiva
                 if blnTmr == True:
                     
+                    # Atualiza o título com a contagem de tempo regressivo               
+                    self.setWindowTitle(strTitulo +  " [" + str(self.time_to_wait) + "]" )
+                    
                     # Atualiza a mensagem com a contagem de tempo regressivo
-                    self.setText(strMensagem.upper() + " [" + str(self.time_to_wait) + "]")
+                    #self.setText(strMensagem.upper() + " (" + str(self.time_to_wait) + ")")
                     
                 else:
                     
@@ -171,7 +183,9 @@ class Message_Box(QMessageBox):
                 self.time_to_wait -= 1
         
                 # Verifica se já encerrou o tempo
-                if self.time_to_wait <= 0:
+                if self.time_to_wait < 0:
+                    
+                    # Fecha o form
                     self.close()
             
             except Exception as e:
@@ -192,3 +206,26 @@ class Message_Box(QMessageBox):
     except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc()) 
+            
+
+
+            
+def Message_Label(objLabel, strMessage, typeIcon = Icon_Message, blnClear = False, blnTimer = False,  timeout=5 ):
+    try:
+        # TODO IMPLEMENTAR MESSAGE_LABEL
+        pass    
+    
+        # Verifica qual o ícone a ser exibido
+        if typeIcon.value == 0:
+            objLabel.setPixmap(QPixmap(QMessageBox.Critical))
+        elif typeIcon.value == 1:
+            objLabel.setIcon(QMessageBox.Warning)
+        elif typeIcon.value == 2:
+            objLabel.setIcon(QMessageBox.Information)
+        elif typeIcon.value == 3:
+            objLabel.setIcon(QMessageBox.Question)
+    
+    except Exception as e:
+        # Atualiza arquivo de erro com o erro ocorrido
+        m_Err.printErr(traceback.format_exc()) 
+            
