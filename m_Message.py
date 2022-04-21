@@ -170,7 +170,7 @@ class Message_Box(QMessageBox):
                     
                     # Atualiza o título com a contagem de tempo regressivo               
                     self.setWindowTitle(strTitulo +  " [" + str(self.time_to_wait) + "]" )
-                    
+                     
                     # Atualiza a mensagem com a contagem de tempo regressivo
                     #self.setText(strMensagem.upper() + " (" + str(self.time_to_wait) + ")")
                     
