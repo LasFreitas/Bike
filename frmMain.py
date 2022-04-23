@@ -134,6 +134,24 @@ class Ui_Main(QtWidgets.QDialog):
             pbPercentBar.setValue(0)
             pbPercentBar.hide()
             
+            
+            lbMsgIcon = self.findChild(QtWidgets.QLabel, 'lbMessageIcon')
+            lbMsgIcon.setPixmap(QPixmap(m_Image.Load_Image('Message.png')))
+            
+            lbMsg1 = self.findChild(QtWidgets.QLabel, 'lbMessage1')
+            lbMsg1.setText('')
+            
+            lbMsg2 = self.findChild(QtWidgets.QLabel, 'lbMessage2')
+            lbMsg2.setText('')
+            
+            lbMsg3 = self.findChild(QtWidgets.QLabel, 'lbMessage3')
+            lbMsg3.setText('')
+            
+            
+            
+            
+            
+            
             '''---------- CONFIGURAÇÃO DO FORM ----------'''
                                                     
             # Configura o form      
