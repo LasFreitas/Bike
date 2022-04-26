@@ -15,6 +15,12 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, QDi
 # imports Locais
 import m_Var
 import m_Err
+#import frmMain
+
+
+
+
+
 
 
 
@@ -157,6 +163,10 @@ class Message_Box(QMessageBox):
                 # Atualiza mensagem a ser exibida
                 self.setText(strMensagem.upper())
                 
+                
+                frmMain.Change_Text_Message('lixo')
+
+                
         except Exception as e:
                 # Atualiza arquivo de erro com o erro ocorrido
                 m_Err.printErr(traceback.format_exc())  
@@ -210,21 +220,22 @@ class Message_Box(QMessageBox):
 
 
             
-def Message_Label(objLabel, strMessage, typeIcon = Icon_Message, blnClear = False, blnTimer = False,  timeout=5 ):
+def Message_Label(strMessage, typeIcon = Icon_Message, blnClear = False, blnTimer = False,  timeout=5 ):
     try:
         # TODO IMPLEMENTAR MESSAGE_LABEL
-        pass    
-    
-        # Verifica qual o ícone a ser exibido
-        if typeIcon.value == 0:
-            objLabel.setPixmap(QPixmap(QMessageBox.Critical))
-        elif typeIcon.value == 1:
-            objLabel.setIcon(QMessageBox.Warning)
-        elif typeIcon.value == 2:
-            objLabel.setIcon(QMessageBox.Information)
-        elif typeIcon.value == 3:
-            objLabel.setIcon(QMessageBox.Question)
-    
+        #frmMain.Change_Text_Message("teste de mensagem")
+        pass
+        '''
+            # Verifica qual o ícone a ser exibido
+            if typeIcon.value == 0:
+            #  objLabel.setPixmap(QPixmap(QMessageBox.Critical))
+            elif typeIcon.value == 1:
+            #  objLabel.setIcon(QMessageBox.Warning)
+            elif typeIcon.value == 2:
+            #  objLabel.setIcon(QMessageBox.Information)
+            elif typeIcon.value == 3:
+            # objLabel.setIcon(QMessageBox.Question)
+        '''
     except Exception as e:
         # Atualiza arquivo de erro com o erro ocorrido
         m_Err.printErr(traceback.format_exc()) 

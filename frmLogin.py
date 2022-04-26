@@ -102,6 +102,7 @@ class Ui_Login(QtWidgets.QDialog):
             else:
                 # Exibe mensagem ao usuário que campo não pode ser branco
                 
+               # m_Message.Message_Label('lixo lixo lixo',m_Message.Icon_Message.m_Warning, m_Message.Button_Message.m_NoButton)
                 
                 lixo = m_Message.Message_Box(m_Var.strSystem, '*DSS', m_Message.Icon_Message.m_Warning, m_Message.Button_Message.m_NoButton, True, 5)
                 lixo.exec_()

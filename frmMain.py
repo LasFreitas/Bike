@@ -147,8 +147,7 @@ class Ui_Main(QtWidgets.QDialog):
             lbMsg3 = self.findChild(QtWidgets.QLabel, 'lbMessage3')
             lbMsg3.setText('')
             
-            
-            
+                     
             
             
             
@@ -196,6 +195,13 @@ class Ui_Main(QtWidgets.QDialog):
                 else:
                     pass
             
+            
+            
+            
+            
+           
+            
+            
             # Função para Habilitar / Desabilitar botões
             def Button_Enabled(blnBool):
                 
@@ -218,9 +224,27 @@ class Ui_Main(QtWidgets.QDialog):
             
             
             
+
+            
+            
+            
         except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc())
+
+
+def Change_Text_Message(self, strText):
+    try:
+        self.lbMsg1.setText(strText)
+        self.lbMsg1.update()
+        self.lbMsg1.repaint()
+
+
+        
+    except Exception as e:
+            # Atualiza arquivo de erro com o erro ocorrido
+            m_Err.printErr(traceback.format_exc())
+                        
 
 
 
