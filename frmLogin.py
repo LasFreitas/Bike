@@ -10,12 +10,14 @@ from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QDialog,
                              QListWidgetItem, QMainWindow, QTableWidgetItem,
                              QWidget)
+#from numpy import c_
  # imports locais
 import m_Err
 import m_Form
 import m_Var
 import m_Hash
 import m_Message
+import c_Database
 
 
 class Ui_Login(QtWidgets.QDialog):
@@ -103,6 +105,11 @@ class Ui_Login(QtWidgets.QDialog):
                 # Exibe mensagem ao usuário que campo não pode ser branco
                 
                # m_Message.Message_Label('lixo lixo lixo',m_Message.Icon_Message.m_Warning, m_Message.Button_Message.m_NoButton)
+                
+                lixodb = c_Database
+                
+                
+                
                 
                 lixo = m_Message.Message_Box(m_Var.strSystem, '*DSS', m_Message.Icon_Message.m_Warning, m_Message.Button_Message.m_NoButton, True, 5)
                 lixo.exec_()

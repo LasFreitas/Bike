@@ -164,7 +164,7 @@ class Message_Box(QMessageBox):
                 self.setText(strMensagem.upper())
                 
                 
-                frmMain.Change_Text_Message('lixo')
+                
 
                 
         except Exception as e:
