@@ -17,8 +17,10 @@ import m_Form
 import m_Var
 import m_Hash
 import m_Message
-import c_Database
+import m_Database
 
+
+connLogin = None
 
 class Ui_Login(QtWidgets.QDialog):
                 
@@ -73,6 +75,7 @@ class Ui_Login(QtWidgets.QDialog):
             # Atribue função ao pressionar tecla ENTER/RETURN
             self.lbPassword.returnPressed.connect(self.Key_Return)
             
+            # Atribue função ao pressionar conjunto teclas ALT + F10
             shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.AltModifier + QtCore.Qt.Key_F10), self.lbPassword, context= QtCore.Qt.WidgetWithChildrenShortcut, activated=self.Key_Press_Alt_F10)
             
             
@@ -98,21 +101,29 @@ class Ui_Login(QtWidgets.QDialog):
             
             # Verifica se foi digitado algum texto
             if self.lbPassword.text() > "":
+                                
+                # Verifica se BD está disponível
+                if m_Var.blnDatabase == True:
+                    
+                                     
+                    # Exibe aviso ao usuário
+                    m_Message.Show_Notice_Box('*IDU', False)
+                    
+                    
+                    # Conecta a Database e verifica se usuário está cadastrado
+                    ConnLogin = m_Database.Get_Database("CADSYSUSER", "USERPASSWORD", "USERPASSWORD")
+            
+                    m_Message.Show_Notice_Box(self.lbPassword.text(), False)
+                
                 
                 print(m_Hash.CreateHash(self.lbPassword.text()))  
+                
            
             else:
-                # Exibe mensagem ao usuário que campo não pode ser branco
-                
-               # m_Message.Message_Label('lixo lixo lixo',m_Message.Icon_Message.m_Warning, m_Message.Button_Message.m_NoButton)
-                
-                lixodb = c_Database
-                
-                
-                
-                
-                lixo = m_Message.Message_Box(m_Var.strSystem, '*DSS', m_Message.Icon_Message.m_Warning, m_Message.Button_Message.m_NoButton, True, 5)
-                lixo.exec_()
+               
+               m_Message.Show_Message_Box(m_Var.strSystem, '*DSS', m_Message.Icon_Message.m_Critical, m_Message.Button_Message.m_Nobutton, True, 5)
+               
+               
                 
                              
         except Exception as e:

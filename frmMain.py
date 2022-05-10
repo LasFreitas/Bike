@@ -7,6 +7,7 @@ import os
 import sys
 import time
 import traceback
+from xmlrpc.client import TRANSPORT_ERROR
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
 
@@ -175,13 +176,20 @@ class Ui_Main(QtWidgets.QDialog):
                     # Carrega imagem e atualiza tooltip
                     strDatabaseImage = ["DBOn.png" , "Database Online"]
                     # Habilita os botões
-                    Button_Enabled(True)
+                    #Button_Enabled(True)
+                    # Atualiza variável
+                    m_Var.blnDatabase = True
                 else:
                     # Carrega imagem e atualiza tooltip
                     strDatabaseImage = ["DBOff.png" , "Database Offline"]
                     # Desabilita os botões
-                    Button_Enabled(False)
-                    
+                    #Button_Enabled(False)
+                    # Atualiza variável
+                    m_Var.blnDatabase = False
+                
+                # Habilita os botões
+                Button_Enabled(m_Var.blnDatabase)
+                 
                 # Carrega IMAGEM e atualiza tooltip
                 lbSystemDatabase = self.findChild(QtWidgets.QLabel, 'lbDatabase')
                 lbSystemDatabase.setPixmap(QPixmap(m_Image.Load_Image(strDatabaseImage[0])))
@@ -197,8 +205,7 @@ class Ui_Main(QtWidgets.QDialog):
             
             
             
-            
-            
+                        
            
             
             
@@ -240,7 +247,7 @@ def Change_Text_Message(self, strText):
         self.lbMsg1.repaint()
 
 
-        
+
     except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc())
@@ -258,8 +265,13 @@ def main():
         app = QtWidgets.QApplication(sys.argv)
         window = Ui_Main()
         window.show()
-                
+    
+      
         QTimer.singleShot(500,frmLogin.main())
+      
+        
+        
+        
         
         app.exec_()
     

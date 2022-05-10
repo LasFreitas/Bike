@@ -20,6 +20,11 @@ strIP = socket.gethostbyname(strComputer)
 strDatabaseFile = 'BK'
 strDatabaseExension = 'DB'
 strDatabaseFileName = "BIKE.DB"
+blnDatabase = False     # Indica se database está online
+
+''' CONEXÃO DATABASE '''
+_dbConnection = None
+_dbCommandText = "SELECT * FROM "
 
 ''' DIRETÓRIOS DE TRABALHO '''
 lstDirectory = ['DATABASE', 'EXPORT', 'IMPORT','LOG', 'ERR', 'ICONS', 'REPORT', 'BACKUP']
