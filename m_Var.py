@@ -5,6 +5,11 @@ import enum
 
 import m_Color
 
+
+import locale
+
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+
 ''' NOME DO USUÁRIO '''
 strUser = "SYSTEM"    
 

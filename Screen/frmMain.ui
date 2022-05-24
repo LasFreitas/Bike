@@ -428,7 +428,7 @@
        <string>Usuário</string>
       </property>
       <property name="accessibleName">
-       <string>SYS|FS12</string>
+       <string>SYS|FS12|FB</string>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 255, 255);</string>

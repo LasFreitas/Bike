@@ -1,5 +1,6 @@
 
 # imports
+
 import sys
 import traceback
 
@@ -10,6 +11,8 @@ from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QDialog,
                              QListWidgetItem, QMainWindow, QTableWidgetItem,
                              QWidget)
+import datetime
+
 #from numpy import c_
  # imports locais
 import m_Err
@@ -18,9 +21,12 @@ import m_Var
 import m_Hash
 import m_Message
 import m_Database
+import m_Text
+
+import c_Database
 
 
-connLogin = None
+dbLogin = c_Database.Database()
 
 class Ui_Login(QtWidgets.QDialog):
                 
@@ -84,7 +90,7 @@ class Ui_Login(QtWidgets.QDialog):
             m_Form.Form_Config(self)   
            
            
-
+            
           
 
         except Exception as e:
@@ -104,24 +110,81 @@ class Ui_Login(QtWidgets.QDialog):
                                 
                 # Verifica se BD está disponível
                 if m_Var.blnDatabase == True:
-                    
-                                     
+                                  
                     # Exibe aviso ao usuário
-                    m_Message.Show_Notice_Box('*IDU', False)
+                    m_Message.Show_Notice_Box('*IDU',m_Message.Icon_Message.m_User, False)
                     
+                    # Pesquisa no BD se existe o usuário
+                    tpUser = dbLogin.Search_Row('cadsysuser', 'userpassword' , m_Hash.CreateHash(self.lbPassword.text()))
                     
-                    # Conecta a Database e verifica se usuário está cadastrado
-                    ConnLogin = m_Database.Get_Database("CADSYSUSER", "USERPASSWORD", "USERPASSWORD")
+                    # Verifica se o usuário está cadastrado 
+                    if tpUser is not None: #len(tpUser)> 0:
+                               
+                        # TODO VERIFICAR COMO RETORNAR 'DICIONARIO' DA PESQUISA
+                        # TODO PARA MUDAR DE TPUSER[1] PARA TPUSER[USERNICKNAME]
+                                                                    
+                        # Atualiza variável com o nome do usuário
+                        m_Var.strUser = tpUser[1].upper()
+                        
+                        # Atualiza variáveis para atualizar o banco de dados
+                        intAccessNumber  = tpUser[2] + 1
+                        datLastAccess = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+                        
+                        # Exibe mensagem de boas vindas
+                        m_Message.Show_Notice_Box(m_Message.Welcome() + ', ' + tpUser[1].upper() + '|| Último acesso em: ' + tpUser[3][0:10] + ' às ' + tpUser[3][11:16] + '|| Acesso Nr.: ' + '{:n}'.format(tpUser[2],0),m_Message.Icon_Message.m_User,False,3)
+                    
+                        '''
+                        0 - USERID
+                        1 - USERNICKNAME
+                        2 - USERACCESSNUMBER
+                        3 - USERLASTACCESS
+                        4 - USERPASSWORD
+                        
+                        '''                   
+                       
+                        # Verifica se database está online
+                        if m_Var.blnDatabase == True:
+                            
+                            # Atualiza database com os dados do novo acesso
+                            if dbLogin.Crud_Record('cadSysUser', (tpUser[0], tpUser[1], intAccessNumber, datLastAccess, tpUser[4], tpUser[4]), 'UserPassword = ?', c_Database.Type_Operation.m_Update) == True:
+                                
+                                # Fecha janela de login
+                                self.close()
+                                
+                                # Exibe mensagem atualização do banco de dados
+                                m_Message.Show_Notice_Box('*ADB', m_Message.Icon_Message.m_Information, False, 3)
+                                
+                                # Atualiza arquivo de log com a data e hora da inicialização do sistema
+                                m_Text.write_texto("LOG", "LOGIN NO SISTEMA|ACESSO NR.: " '{:n}'.format(tpUser[2],0) + '|' + datLastAccess , "LOG", True)
+                                
+                                
+                            
+                           
+                            
+                            
+                        else:
+                            # NÃO PODE ATUALIZAR O BD
+                            pass
+                            
+                        
+                  
+                    else:
+                        # NÃO EXISTE O USUÁRIO
+                        #print('não')
+                         # Exibe mensagem de erro - Senha Obrigatória
+                        m_Message.Show_Message_Box(m_Var.strSystem, '*UNC', m_Message.Icon_Message.m_Critical, m_Message.Button_Message.m_Nobutton, True, 5)
             
-                    m_Message.Show_Notice_Box(self.lbPassword.text(), False)
+                   #m_Message.Show_Notice_Box(self.lbPassword.text(), False)
                 
                 
-                print(m_Hash.CreateHash(self.lbPassword.text()))  
+                #print(m_Hash.CreateHash(self.lbPassword.text()))  
                 
            
             else:
                
+               # Exibe mensagem de erro - Senha Obrigatória
                m_Message.Show_Message_Box(m_Var.strSystem, '*DSS', m_Message.Icon_Message.m_Critical, m_Message.Button_Message.m_Nobutton, True, 5)
+               
                
                
                 

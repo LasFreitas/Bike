@@ -4,6 +4,7 @@
 
 # imports
 import os
+import socket
 import sys
 import time
 import traceback
@@ -112,8 +113,8 @@ class Ui_Main(QtWidgets.QDialog):
             lbTittle.setText(m_Var.strSystem)
             
             # Usuário
-            lbUsuario = self.findChild(QtWidgets.QLabel, 'lbUserInformation')
-            lbUsuario.setText(m_Var.strUser)
+            self.lbUsuario = self.findChild(QtWidgets.QLabel, 'lbUserInformation')
+            self.lbUsuario.setText(m_Var.strUser)
                        
             # Hora Atual
             self.lbTimer = self.findChild(QtWidgets.QLabel, 'lbHora')
@@ -171,6 +172,12 @@ class Ui_Main(QtWidgets.QDialog):
                 self.lbDate.update()
                 self.lbDate.repaint()
                 
+                # Atualiza nome do usuário
+                self.lbUsuario.setText(m_Var.strUser)
+                self.lbUsuario.update()
+                self.lbUsuario.repaint()
+                
+                
                 # Imagem DATABASE
                 if os.path.exists(m_Var.strDirSystem + "\\Database\\" + m_Var.strDatabaseFileName):
                     # Carrega imagem e atualiza tooltip
@@ -186,14 +193,37 @@ class Ui_Main(QtWidgets.QDialog):
                     #Button_Enabled(False)
                     # Atualiza variável
                     m_Var.blnDatabase = False
+                    
+                # Obtêm o número do IP
+                m_Var.strIP = socket.gethostbyname(socket.gethostname())
                 
-                # Habilita os botões
-                Button_Enabled(m_Var.blnDatabase)
-                 
-                # Carrega IMAGEM e atualiza tooltip
-                lbSystemDatabase = self.findChild(QtWidgets.QLabel, 'lbDatabase')
-                lbSystemDatabase.setPixmap(QPixmap(m_Image.Load_Image(strDatabaseImage[0])))
-                lbSystemDatabase.setToolTip(strDatabaseImage[1])
+                # Verifica se está conectado a internet
+                if m_Var.strIP=="127.0.0.1":
+                    strInternetImage = ["NetOff.png", "Internet Offline"]
+                else:
+                    strInternetImage = ["NetOn.png", "Internet Online"]
+                               
+                # Verifica se existe usuário logado
+                if m_Var.strUser != "SYSTEM":
+                
+                    # Habilita os botões
+                    Button_Enabled(m_Var.blnDatabase)
+                    
+                    # Carrega IMAGEM e atualiza tooltip
+                    lbSystemDatabase = self.findChild(QtWidgets.QLabel, 'lbDatabase')
+                    lbSystemDatabase.setPixmap(QPixmap(m_Image.Load_Image(strDatabaseImage[0])))
+                    lbSystemDatabase.setToolTip(strDatabaseImage[1])
+                    
+                    # Carrega IMAGEM e atualiza tooltip
+                    lbNuvem = self.findChild(QtWidgets.QLabel, 'lbInternet')
+                    lbNuvem.setPixmap(QPixmap(m_Image.Load_Image(strInternetImage[0])))
+                    lbNuvem.setToolTip(strInternetImage[1])
+                    
+                else:
+                    # Desaabilita os botões
+                    Button_Enabled(False)
+                    
+                    
 
                 # Carrega imagem caso exista erro no sistema
                 # TODO Refazer rotina para exibir mensagem erro

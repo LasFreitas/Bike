@@ -3,7 +3,10 @@
 
 
 # imports
-from configparser import InterpolationMissingOptionError
+
+
+from ast import Pass
+from datetime import datetime
 import sys
 import enum
 import traceback
@@ -61,7 +64,8 @@ dictMessage = {
                 
                 
                 # ''' DATABASE '''
-                '*DBO': 'ABRINDO BANCO DE DADOS||AGUARDE . . .'
+                '*ODB': 'ABRINDO BANCO DE DADOS||AGUARDE . . .',
+                '*ADB': 'ATUALIZANDO BANCO DE DADOS||AGUARDE . . .'
                 
                 }
 
@@ -76,28 +80,20 @@ class Button_Message(enum.Enum):
    m_No = 1
    m_YesNo = 2
    m_Nobutton = 10
-      
-   '''
-        m_OK = 0
-        m_OkCancel = 1
-        m_Yes = 2
-        m_YesNo = 3
-        m_Open = 4
-        m_Save = 5
-        m_NoButton = 10
-   '''   
+     
+
 class Icon_Message(enum.Enum):
    m_Critical = 0
    m_Warning = 1
    m_Information = 2
    m_Question = 3
+   m_User = 4
    
    
 class Notice_Form(enum.Enum):
     m_Load = 0
     m_Refresh = 1
     m_Close = 2
-
 
 
 class Ui_Message(QtWidgets.QDialog):
@@ -164,6 +160,7 @@ class Ui_Notice(QtWidgets.QDialog):
   
 ''' ---------- FUNÇÕES ---------- '''
 
+''' ---------- TIMER ---------- '''
 def Show_Timer(blnShowTimer, strMessage, objLabel, intTime):
     try:
         while intTime:
@@ -184,6 +181,28 @@ def Show_Timer(blnShowTimer, strMessage, objLabel, intTime):
     except Exception as e:
         # Atualiza arquivo de erro com o erro ocorrido
         m_Err.printErr(traceback.format_exc())  
+    
+''' ---------- ICONE ---------- '''      
+def Select_Icon(objLabel, intIcon):
+    try:
+        # Verifica qual o ícone a ser exibido
+        if intIcon.value == 0:
+              objLabel.setPixmap(QPixmap(m_Image.Load_Image('Critical.png'))) 
+        elif intIcon.value == 1:
+             objLabel.setPixmap(QPixmap(m_Image.Load_Image('Warming.png'))) 
+        elif intIcon.value == 2:
+             objLabel.setPixmap(QPixmap(m_Image.Load_Image('Information.png'))) 
+        elif intIcon.value == 3:
+             objLabel.setPixmap(QPixmap(m_Image.Load_Image('Question.png'))) 
+        elif intIcon.value == 4:
+             objLabel.setPixmap(QPixmap(m_Image.Load_Image('User.png'))) 
+             
+        objLabel.update()
+        objLabel.repaint()
+        
+    except Exception as e:
+        # Atualiza arquivo de erro com o erro ocorrido
+        m_Err.printErr(traceback.format_exc()) 
 
 ''' MESSAGE BOX '''   
 def Show_Message_Box(strTittle, strMessage, typeIcon = Icon_Message, typeButton = Button_Message, blnTimer = False,  timeout=5, parent=None):
@@ -207,8 +226,8 @@ def Show_Message_Box(strTittle, strMessage, typeIcon = Icon_Message, typeButton 
         boxMsg.show()
                    
         # Define o Título 
-        lbTittle = boxMsg.findChild(QtWidgets.QLabel, 'lbTitulo')
-        lbTittle.setText(strTittle.upper())
+        #lbTittle = boxMsg.findChild(QtWidgets.QLabel, 'lbTitulo')
+        #lbTittle.setText(strTittle.upper())
         
         btYes = boxMsg.findChild(QtWidgets.QPushButton, 'btSim')
         btYes.setIcon(QtGui.QIcon(m_Image.Load_Image('Yes.png')))
@@ -243,6 +262,10 @@ def Show_Message_Box(strTittle, strMessage, typeIcon = Icon_Message, typeButton 
         lbIcon = boxMsg.findChild(QtWidgets.QLabel, 'lbIcone')
                 
         # Verifica qual o ícone a ser exibido
+        Select_Icon(lbIcon, typeIcon)
+        
+        
+        '''
         if typeIcon.value == 0:
              lbIcon.setPixmap(QPixmap(m_Image.Load_Image('Critical.png'))) 
         elif typeIcon.value == 1:
@@ -251,6 +274,9 @@ def Show_Message_Box(strTittle, strMessage, typeIcon = Icon_Message, typeButton 
              lbIcon.setPixmap(QPixmap(m_Image.Load_Image('Information.png'))) 
         elif typeIcon.value == 3:
              lbIcon.setPixmap(QPixmap(m_Image.Load_Image('Question.png'))) 
+        elif typeIcon.value == 4:
+             lbIcon.setPixmap(QPixmap(m_Image.Load_Image('User.png'))) 
+        '''
                     
        
         lbMessage = boxMsg.findChild(QtWidgets.QLabel, 'lbMensagem')
@@ -278,7 +304,7 @@ def Show_Message_Box(strTittle, strMessage, typeIcon = Icon_Message, typeButton 
 
 
 ''' AVISO '''
-def Show_Notice_Box(strMessage = "AGUARDE . . .",  blnShowTimer = False , timeout = 3):
+def Show_Notice_Box(strMessage = "AGUARDE . . .", typeIcon = Icon_Message, blnShowTimer = False , timeout = 3):
     try:
         
         strMensagem = ""
@@ -288,7 +314,8 @@ def Show_Notice_Box(strMessage = "AGUARDE . . .",  blnShowTimer = False , timeou
     
     
         lbIcon = boxNotice.findChild(QtWidgets.QLabel, 'lbIcone')
-        lbIcon.setPixmap(QPixmap(m_Image.Load_Image('information.png'))) 
+        Select_Icon(lbIcon, typeIcon)
+        #lbIcon.setPixmap(QPixmap(m_Image.Load_Image('information.png'))) 
         
         lbMessage = boxNotice.findChild(QtWidgets.QLabel, 'lbMensagem')
         lbMessage.setText(Format_Message(strMessage))
@@ -342,6 +369,23 @@ def Format_Message(strMsg):
         
         return strMsg.upper()
      
+    except Exception as e:
+        # Atualiza arquivo de erro com o erro ocorrido
+        m_Err.printErr(traceback.format_exc())  
+
+def Welcome():
+    
+    try:
+        
+        current_hour = int(datetime.now().strftime('%H'))
+        if current_hour < 12:
+            return 'Bom Dia'
+        elif 12 <= current_hour < 18:
+            return 'Boa Tarde'
+        else:
+            return 'Boa Noite'
+                
+    
     except Exception as e:
         # Atualiza arquivo de erro com o erro ocorrido
         m_Err.printErr(traceback.format_exc())  

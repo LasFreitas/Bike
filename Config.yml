@@ -1,0 +1,46 @@
+# https://geekflare.com/python-yaml-intro/
+# https://python.land/data-processing/python-yaml
+
+#--- SYSTEM ---
+System: 'Bike - Estatísticas'
+   
+#--- DATABASE ---
+Database: 'bike.db'
+ 
+#--- DIRETÓRIOS DE TRABALHO ---
+Directory: ['DATABASE', 'EXPORT', 'IMPORT','LOG', 'ERR', 'ICONS', 'REPORT', 'BACKUP']
+
+#--- BACKUP ---
+Backup:
+  # FIXME IMPLEMENTAR O BACKUP DO ARQUIVO DE CONFIGURAÇÃO
+  
+  Extension: ['DB','ERR','LOG']
+  DaysDB: 5
+  DaysLE: 10
+
+#--- CORES DO SISTEMA ---
+ColorSystem:
+    
+  Clear: #ffffff
+  Dark: #000080
+  
+ColorFont:
+
+  Clear: #f5f5f5
+  Dark: #fdd835
+
+#--- FONTES DO SISTEMA ---
+FontSystem:
+
+  Family: 'Consolas'
+  Size: 14
+  Weigth: 'Normal'
+  Style: 'normal'
+
+FontReport:
+
+  Family: 'Courier'
+  Size: 9
+  Weigth: 'Normal'
+  Style: 'normal'
+
