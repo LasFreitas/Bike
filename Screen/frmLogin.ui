@@ -31,6 +31,9 @@
      <height>0</height>
     </size>
    </property>
+   <property name="accessibleName">
+    <string>SYS</string>
+   </property>
    <property name="frameShape">
     <enum>QFrame::Panel</enum>
    </property>
@@ -68,7 +71,7 @@
        <string>SYS|FB|FS12</string>
       </property>
       <property name="frameShape">
-       <enum>QFrame::Panel</enum>
+       <enum>QFrame::Box</enum>
       </property>
       <property name="frameShadow">
        <enum>QFrame::Sunken</enum>

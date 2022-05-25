@@ -12,6 +12,19 @@ import enum
 import m_Err
 import m_Var
 
+from PyQt5 import QtCore
+from PyQt5 import QtGui
+from PyQt5.QtGui import QIcon, QPixmap
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QMessageBox, QDialog
+from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import *
+
+from PyQt5.QtWidgets import * 
+from PyQt5 import QtCore, QtGui
+from PyQt5.QtGui import * 
+from PyQt5.QtCore import * 
+
+
 class Type_Operation(enum.Enum):
     m_Insert = 0
     m_Update = 1
@@ -34,6 +47,7 @@ class Database(object):
         
         
         def __new__(cls, *args, **kwargs):
+            
             if cls.instance is None:
                 cls.instance = super().__new__(Database)
                 return cls.instance
@@ -53,9 +67,11 @@ class Database(object):
            
     
         def __enter__(self):
+            
             return self
 
         def __exit__(self, ext_type, exc_value, traceback):
+            
             self.cursor.close()
             if isinstance(exc_value, Exception):
                 self.conn.rollback()
@@ -191,5 +207,4 @@ class Database(object):
         # Atualiza arquivo de erro com o erro ocorrido
         m_Err.printErr(traceback.format_exc())
     
-   
-   
+

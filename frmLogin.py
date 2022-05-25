@@ -1,32 +1,30 @@
 
-# imports
-
+# ─── IMPORTS ────────────────────────────────────────────────────────────────────
+import datetime
 import sys
 import traceback
 
+from PyQt5 import Qt, QtCore, QtGui, QtWidgets, uic
+from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QDialog, QListWidgetItem, QMainWindow, QTableWidgetItem, QWidget)
 
-
-from PyQt5 import QtWidgets, uic, Qt, QtCore, QtCore, QtGui, QtWidgets
-#from PyQt5 import QtCore, QtWidgets, uic, Qt
-from PyQt5.QtWidgets import (QApplication, QDesktopWidget, QDialog,
-                             QListWidgetItem, QMainWindow, QTableWidgetItem,
-                             QWidget)
-import datetime
-
-#from numpy import c_
- # imports locais
+# ─── IMPORTS LOCAIS ─────────────────────────────────────────────────────────────
+import c_Database
+import c_Message
+import m_Database
 import m_Err
 import m_Form
-import m_Var
 import m_Hash
 import m_Message
-import m_Database
 import m_Text
+import m_Var
 
-import c_Database
 
 
 dbLogin = c_Database.Database()
+
+_Message = c_Message.Message()
+
+
 
 class Ui_Login(QtWidgets.QDialog):
                 
@@ -34,11 +32,10 @@ class Ui_Login(QtWidgets.QDialog):
         
         try:
             
+            # ─── FORM ────────────────────────────────────────────────────────
             super(Ui_Login,self).__init__() 
             self.ui = uic.loadUi(m_Var.strDirSystem + '\\Screen\\frmLogin.ui', self)
             
-            
-            '''---------- FORM ----------'''
             # Define cor de fundo do form  
             self.setStyleSheet("QDialog { background-color:" + m_Var.clrColorDark +" }");
            
@@ -52,8 +49,7 @@ class Ui_Login(QtWidgets.QDialog):
             self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint,False)      
                      
             
-            '''---------- BUTTON ----------'''
-           
+            # ─── BUTTON ──────────────────────────────────────────────────────
             ''' ENCERRAR '''
             # Atribue controle a variável
             # butExit = self.ui.findChild(QtWidgets.QPushButton, 'pbExit')
@@ -61,11 +57,8 @@ class Ui_Login(QtWidgets.QDialog):
             # Atribue função fechar ao click do mouse
             # butExit.clicked.connect(self.close)
             
-                     
-            
-            
-            '''---------- LABEL -----------'''
-            
+            # ─── LABEL ───────────────────────────────────────────────────────
+            ''' PASSWORD '''
             # Atribue controle a variável
             self.lbPassword = self.ui.findChild(QtWidgets.QLineEdit, 'lnUser')
             
@@ -83,36 +76,28 @@ class Ui_Login(QtWidgets.QDialog):
             
             # Atribue função ao pressionar conjunto teclas ALT + F10
             shortcut = QtWidgets.QShortcut(QtGui.QKeySequence(QtCore.Qt.AltModifier + QtCore.Qt.Key_F10), self.lbPassword, context= QtCore.Qt.WidgetWithChildrenShortcut, activated=self.Key_Press_Alt_F10)
-            
-            
-            
+                        
             # Configura o form      
             m_Form.Form_Config(self)   
            
-           
-            
-          
-
         except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc())
-
-
-    '''---------- FUNÇÕES TECLADO ----------'''
-
-    '''---------- ENTER ----------'''
+   
+    # ─── TECLADO ────────────────────────────────────────────────────────────────────
+    # ─── ENTER / RETURN ──────────────────────────────────────────────────────────────────────
     def Key_Return(self):
         
         try:
-            
+
             # Verifica se foi digitado algum texto
             if self.lbPassword.text() > "":
                                 
                 # Verifica se BD está disponível
                 if m_Var.blnDatabase == True:
-                                  
+                         
                     # Exibe aviso ao usuário
-                    m_Message.Show_Notice_Box('*IDU',m_Message.Icon_Message.m_User, False)
+                    _Message.Show_Message_Box('*IDU', m_Message.Icon_Message.m_User, m_Message.Button_Message.m_Nobutton, False, 5, False)         
                     
                     # Pesquisa no BD se existe o usuário
                     tpUser = dbLogin.Search_Row('cadsysuser', 'userpassword' , m_Hash.CreateHash(self.lbPassword.text()))
@@ -131,8 +116,8 @@ class Ui_Login(QtWidgets.QDialog):
                         datLastAccess = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                         
                         # Exibe mensagem de boas vindas
-                        m_Message.Show_Notice_Box(m_Message.Welcome() + ', ' + tpUser[1].upper() + '|| Último acesso em: ' + tpUser[3][0:10] + ' às ' + tpUser[3][11:16] + '|| Acesso Nr.: ' + '{:n}'.format(tpUser[2],0),m_Message.Icon_Message.m_User,False,3)
-                    
+                        _Message.Update_Message(m_Message.Welcome() + ', ' + tpUser[1].upper() + '|| Último acesso em: ' + tpUser[3][0:10] + ' às ' + tpUser[3][11:16] + '|| Acesso Nr.: ' + '{:n}'.format(tpUser[2],0))
+                        
                         '''
                         0 - USERID
                         1 - USERNICKNAME
@@ -152,50 +137,37 @@ class Ui_Login(QtWidgets.QDialog):
                                 self.close()
                                 
                                 # Exibe mensagem atualização do banco de dados
-                                m_Message.Show_Notice_Box('*ADB', m_Message.Icon_Message.m_Information, False, 3)
-                                
+                                _Message.Update_Message('*ADB') #, m_Message.Icon_Message.m_Information, m_Message.Button_Message.m_Nobutton, False, 5, False)
+                                                           
                                 # Atualiza arquivo de log com a data e hora da inicialização do sistema
                                 m_Text.write_texto("LOG", "LOGIN NO SISTEMA|ACESSO NR.: " '{:n}'.format(tpUser[2],0) + '|' + datLastAccess , "LOG", True)
                                 
-                                
-                            
-                           
-                            
-                            
+                                # Fecha form Message
+                                _Message.Form_Close()
+
                         else:
-                            # NÃO PODE ATUALIZAR O BD
-                            pass
                             
-                        
-                  
+                            # NÃO PODE ATUALIZAR O BD
+                            # Atualiza arquivo de log com a data e hora da inicialização do sistema
+                            m_Text.write_texto("LOG", "LOGIN NO SISTEMA|ACESSO NR.: " '{:n}'.format(tpUser[2],0) + '|' + datLastAccess + '|NÃO FOI POSSÍVEL A ATUALIZAÇÃO DO BANCO DE DADOS|BLNDATABASE = ' + str(m_Var.blnDatabase) , "LOG", True)
+                           
                     else:
+                        
                         # NÃO EXISTE O USUÁRIO
-                        #print('não')
-                         # Exibe mensagem de erro - Senha Obrigatória
-                        m_Message.Show_Message_Box(m_Var.strSystem, '*UNC', m_Message.Icon_Message.m_Critical, m_Message.Button_Message.m_Nobutton, True, 5)
-            
-                   #m_Message.Show_Notice_Box(self.lbPassword.text(), False)
-                
-                
-                #print(m_Hash.CreateHash(self.lbPassword.text()))  
-                
+                        _Message.Show_Message_Box('*UNC', m_Message.Icon_Message.m_Critical, m_Message.Button_Message.m_Nobutton, False, 5, True)         
            
             else:
                
                # Exibe mensagem de erro - Senha Obrigatória
-               m_Message.Show_Message_Box(m_Var.strSystem, '*DSS', m_Message.Icon_Message.m_Critical, m_Message.Button_Message.m_Nobutton, True, 5)
-               
-               
-               
-                
+               _Message.Show_Message_Box('*DSS', m_Message.Icon_Message.m_Critical, m_Message.Button_Message.m_Nobutton, True, 5, True)         
                              
         except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc())
     
-    
-    
-    '''---------- ENTER ----------'''
+
+    # ─── ALT F10 ────────────────────────────────────────────────────────────────────
+ 
     def Key_Press_Alt_F10(self):
         try:
                           
@@ -207,7 +179,7 @@ class Ui_Login(QtWidgets.QDialog):
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc())
     
-           
+    
     def Keypress_Login(self, setkey):
         try:
             if setkey ==  QtCore.Qt.Key_Return:
@@ -220,24 +192,23 @@ class Ui_Login(QtWidgets.QDialog):
         except Exception as e:
             # Atualiza arquivo de erro com o erro ocorrido
             m_Err.printErr(traceback.format_exc())    
-                  
+ 
+
+# ─── MAIN ───────────────────────────────────────────────────────────────────────
+
 def main():
     
     try:
-           
     
         app = QtWidgets.QApplication(sys.argv) 
         window = Ui_Login()
         window.show()
         
         app.exec_()
-        
-        
-    
+
     except Exception as e:
          # Atualiza arquivo de erro com o erro ocorrido
          m_Err.printErr(traceback.format_exc())
-
 
 if __name__ == '__main__':
     main()  
